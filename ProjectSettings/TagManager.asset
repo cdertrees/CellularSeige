@@ -2,8 +2,10 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
-  tags: []
+  serializedVersion: 3
+  tags:
+  - Pathogen
+  - Unit
   layers:
   - Default
   - TransparentFX
@@ -41,3 +43,23 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 2418493171
+    locked: 0
+  - name: Level
+    uniqueID: 1042015611
+    locked: 0
+  - name: Units
+    uniqueID: 1396650933
+    locked: 0
+  - name: Enemies
+    uniqueID: 870173709
+    locked: 0
+  - name: Organ
+    uniqueID: 3241863923
+    locked: 0
+  - name: Menus
+    uniqueID: 218727121
+    locked: 0
+  m_RenderingLayers:
+  - Default
