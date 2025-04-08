@@ -19,6 +19,7 @@ public class Destroyer : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Pathogen"))
         {
+            GameManager.inst.currentPathogens.Remove(other.gameObject);
             Destroy(other.gameObject);
         }
     }
