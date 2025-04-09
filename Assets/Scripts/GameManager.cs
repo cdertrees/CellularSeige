@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using Unity.Mathematics.Geometry;
 using UnityEngine;
@@ -7,9 +8,15 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager inst;
+    [Header("Shop")]
+    public float DNA = 100f;
+    public float health = 100f;
+    public TextMeshProUGUI healthText;
+    
     [Header("Enemies")] public GameObject basicPathogen;
     public List<GameObject> currentPathogens;
     [Header("Wave Calculations")]
+    [SerializeField] float waitTime = 0.6f;
     [SerializeField]public float waveNum = 0;
     //[SerializeField] private float waitMultiplier;
     
@@ -29,8 +36,9 @@ public class GameManager : MonoBehaviour
         
         //Calculate number of enemies and their types, needs to be complicated later on w/ different enemy types
         //float waitTime = Mathf.Pow(2, (0.2f * waveNum)) - 0.9f;
-        float waitTime = ((1.4f * (Mathf.Pow(2, (0.2f *waveNum))))* 0.5f);
-        float pathogenSpeed = ((1.4f * (Mathf.Pow(2, (0.2f *waveNum))))+ 1) ;
+        //float waitTime = ((1.4f * (Mathf.Pow(2, (0.35f *waveNum))))* 0.25f);
+        waitTime = waitTime * 0.95f;
+        float pathogenSpeed = ((1.4f * (Mathf.Pow(2, (0.35f *waveNum))))+ 1) ;
         float pathogenNum = Mathf.Pow(2, waveNum) + 6;
 
         print(waitTime);
@@ -50,7 +58,18 @@ public class GameManager : MonoBehaviour
             
 
         }
+        
+        yield return new WaitUntil(() =>(currentPathogens.Count <= 0));
+        yield return new WaitForSeconds(1f);
+        StartCoroutine("StartWave");
 
+    }
+
+    public void PathogenEnters()
+    {
+     
+        health--;
+        healthText.text = "HEALTH: " + health;
     }
     
   
