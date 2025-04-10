@@ -15,15 +15,21 @@ public class GameManager : MonoBehaviour
     
     [Header("Enemies")] public GameObject basicPathogen;
     public List<GameObject> currentPathogens;
+
+    [Header("Level")] 
+    public List<Vector3> mapPoints;
+    public LineRenderer Map;
+   
+    
     [Header("Wave Calculations")]
     [SerializeField] float waitTime = 0.6f;
     [SerializeField]public float waveNum = 0;
     //[SerializeField] private float waitMultiplier;
     
-    
       
     void Start()
     {
+        
         inst = this;
         StartCoroutine("StartWave");
     }
@@ -52,7 +58,7 @@ public class GameManager : MonoBehaviour
             //add to list : )
             currentPathogens.Add(pathogen);
             //change animation speed
-            pathogenScript.anim.speed = pathogenSpeed;
+            pathogenScript.speed = pathogenSpeed;
             //wait for next one
             yield return new WaitForSeconds(waitTime);
             
