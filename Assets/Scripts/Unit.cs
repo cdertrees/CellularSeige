@@ -1,19 +1,19 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
     public int health;
-    public int damage;
-    public float cooldownTime;
+    public List<int> damages;
+    // public int dmgTypes = 6;
+    //Damages 1. Bacteria 2. Virus 3. Parasite 4. Cancer 5. Allergies 6. Fungi
+    
     private Animator anim;
-
-    public Types type;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {
-        type = Types.Stem;
         reevaluateType();
         anim = GetComponent<Animator>();
     }
@@ -26,31 +26,26 @@ public class Unit : MonoBehaviour
 
     void reevaluateType()
     {
-        //input info here
-        switch (type)
-        {
-            case Types.Stem:
-            {
-                anim.Play("Stem");
-                health = 10;
-                damage = 1;
-                return;
-            }
-
-            case Types.WhiteBlood:
-            {
-                anim.Play("WhiteBlood");
-                health = 10;
-                damage = 3;
-                return;
-            }
-            
-        }
+        //Here will be depositing the new health and dmg and stuff in there
     }
+    
+    
 }
-public enum Types
-{
-    Stem,
-    WhiteBlood,
-
-}
+// public enum Types
+// {
+//     Stem,
+//     Basophil,
+//     BCell,
+//     Bone,
+//     Eosinophil,
+//     Fat,
+//     Intestinal,
+//     KillerT,
+//     Monocyte,
+//     Nerve,
+//     Neutrophil,
+//     Plasma,
+//     Platelet,
+//     RedBlood,
+//
+// }
