@@ -102,7 +102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adca7e4f8ecef1b44815493726bea344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 8019725558068456786}
   paths:
   - map1-1
   - map1-2

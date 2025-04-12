@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public float DNA = 100f;
     public float health = 100f;
     public TextMeshProUGUI healthText;
+    public TextMeshProUGUI dnaText;
+    
     
     [Header("Enemies")] public GameObject basicPathogen;
     public List<GameObject> currentPathogens;
@@ -19,8 +21,10 @@ public class GameManager : MonoBehaviour
     [Header("Level")] 
     public List<Vector3> mapPoints;
     public LineRenderer Map;
-   
-    
+
+    [Header("Camera")] 
+    public GameObject Camera;
+    public float cameraMoveSpeed = 1;
     [Header("Wave Calculations")]
     [SerializeField] float waitTime = 0.6f;
     [SerializeField]public float waveNum = 0;
@@ -76,6 +80,21 @@ public class GameManager : MonoBehaviour
      
         health--;
         healthText.text = "HEALTH: " + health;
+    }
+
+    public void SomethingBought(int cost)
+    {
+        DNA -= cost;
+        dnaText.text = "DNA: " + DNA;
+
+    }
+
+    public void cameraMove(bool isUp)
+    {
+        
+        var pos = transform.position;
+         pos.y += isUp ? cameraMoveSpeed*Time.deltaTime : -cameraMoveSpeed*Time.deltaTime;
+         transform.position = pos;
     }
     
   
