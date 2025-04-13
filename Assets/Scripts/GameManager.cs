@@ -51,8 +51,8 @@ public class GameManager : MonoBehaviour
         float pathogenSpeed = ((1.4f * (Mathf.Pow(2, (0.35f *waveNum))))+ 1) ;
         float pathogenNum = Mathf.Pow(2, waveNum) + 6;
 
-        print(waitTime);
-        print(pathogenSpeed);
+//        print(waitTime);
+//        print(pathogenSpeed);
         for (int i = 0; i < pathogenNum; i++)
         {
             //spawn pathogen
