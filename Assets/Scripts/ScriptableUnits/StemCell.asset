@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5377f2fab5f2fe744b113c2fe441252a, type: 3}
-  m_Name: Monocyte
+  m_Name: StemCell
   m_EditorClassIdentifier: 
-  name: Monocyte
-  health: 10
-  damages: 04000000040000000200000002000000020000000200000004000000
-  Animation: {fileID: 7400000, guid: 97f5a61676d7ae841b5ccb9d3a1d276b, type: 2}
+  name: Stem Cell
+  health: 999999
+  coolDown: 999999
+  damages: 00000000000000000000000000000000000000000000000000000000
+  animation: {fileID: 7400000, guid: c4f4d9a315910bd4b99b8d635357b1de, type: 2}
   special: 4

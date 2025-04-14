@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: TestCell
   m_EditorClassIdentifier: 
   name: RedBlood
-  health: 5
+  health: 100
   coolDown: 1
   damages: 01000000010000000100000001000000010000000100000001000000
-  Animation: {fileID: 7400000, guid: 37faa41138fabaa4a822d7d7de7468d5, type: 2}
+  animation: {fileID: 7400000, guid: 37faa41138fabaa4a822d7d7de7468d5, type: 2}
   special: 4

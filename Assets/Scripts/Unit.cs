@@ -6,22 +6,21 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    private int health;
-    private List<int> unitDamages = new List<int>();
-    int totaldamages = 7;
+    public float _health;
+    private List<int> _unitDamages = new List<int>();
+    private const int TotalDamages = 7;
+
     //Damages 1. Bacteria 2. Virus 3. Parasite 4. Cancer 5. Allergies 6. Fungi
     public ScriptableUnit unit;
-    
+    public List<ScriptableUnit> units;
     public List<Enemy> pathogensPresent = new List<Enemy>();
-    
-    private Animator anim;
-
-    private float cooldownTime;
-    private float timer;
+    private Animator _anim;
+    private float _cooldownTime;
+    private float _timer;
     
     void Start()
     {
-        anim = GetComponent<Animator>();
+        _anim = GetComponent<Animator>();
         ReevaluateType(unit);
     }
 
@@ -34,29 +33,38 @@ public class Unit : MonoBehaviour
     void ReevaluateType(ScriptableUnit _unit)
     {
         print("reevaluating");
-        anim.Play(_unit.Animation.name);
-        if (_unit.damages.Count == totaldamages)
+        _anim.Play(_unit.animation.name);
+        if (_unit.damages.Count == TotalDamages)
         {
-            unitDamages.Clear();
-            unitDamages = _unit.damages;
+            _unitDamages.Clear();
+            _unitDamages = _unit.damages;
         }
         else
         {
             Debug.LogError("Wrong Number of Damage Types!!");
         }
 
-        cooldownTime = _unit.coolDown;
-        health = _unit.health;
-        timer = cooldownTime;
+        _cooldownTime = _unit.coolDown;
+        _health = _unit.health;
+        _timer = _cooldownTime;
 
     }
 
+    public void TakeDamage(float dmg)
+    {
+        _health -= dmg;
+        if (_health <= 0)
+        {
+            print("i died");
+            ReevaluateType(units[0]);
+        }
+    }
     
     void Attack()
     {
-        if (timer > 0)
+        if (_timer > 0)
         {
-            timer -= Time.deltaTime;
+            _timer -= Time.deltaTime;
         }
         else
         {
@@ -67,12 +75,12 @@ public class Unit : MonoBehaviour
             {
                 print("attacked");
                 var pathogen = pathogensPresent[pathogensPresent.Count-1];
-                var damage = unitDamages[(int)pathogen.enemyType];
+                var damage = _unitDamages[(int)pathogen.enemyType];
                 pathogen.TakeDamage(damage);
             }
             
            
-            timer = cooldownTime;
+            _timer = _cooldownTime;
         }
     }
     
@@ -81,6 +89,7 @@ public class Unit : MonoBehaviour
         if (other.gameObject.tag.Equals("Pathogen"))
         {
             Enemy script = other.gameObject.GetComponent<Enemy>();
+            script.inRange.Add(this);
             pathogensPresent.Add(script);
         }
         
@@ -91,6 +100,7 @@ public class Unit : MonoBehaviour
         if (other.gameObject.tag.Equals("Pathogen"))
         {
             Enemy script = other.gameObject.GetComponent<Enemy>();
+            script.inRange.Remove(this);
             pathogensPresent.Remove(script);
         }
     }

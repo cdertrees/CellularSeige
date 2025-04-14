@@ -20,7 +20,8 @@ public class Destroyer : MonoBehaviour
         if (other.gameObject.CompareTag("Pathogen"))
         {
             GameManager.inst.currentPathogens.Remove(other.gameObject);
-            GameManager.inst.PathogenEnters();
+            //change later if we decide to have specific pathogens deal more dmg to the organ
+            GameManager.inst.PathogenEnters(1);
             Destroy(other.gameObject);
         }
     }

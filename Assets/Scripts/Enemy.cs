@@ -5,19 +5,26 @@ using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
-   // public List<String> paths;
+   
     public float speed;
     public int moveIndex = 0;
     public float health = 1;
-
+    private float _damage = 1;
+    private float _cooldownTime = 0;
     public EnemyTypes enemyType;
+    private Animator _anim;
+    public ScriptablePathogen pathogen;
+    private float _speedmod;
+    [SerializeField]private float _timer = 0;
+
+    public List<Unit> inRange;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-       
+        _anim = GetComponent<Animator>();
+       EvaluateType(pathogen);
     }
 
-    // Update is called once per frame
     void Update()
     {
         //Move towards next point in the Line Renderer. Thank you Unity forums i love you.
@@ -28,15 +35,44 @@ public class Enemy : MonoBehaviour
         {
             moveIndex++;
         }
-
-        // if (moveIndex > GameManager.inst.mapPoints.Count - 1)
-        // {
-        //     
-        // }
+        
+        Attack();
         
     }
 
 
+    void Attack()
+    {
+        if (_timer > 0)
+        {
+            _timer -= Time.deltaTime;
+        } else {
+            //attack
+           
+            // if (inRange[0] != null)
+            // {
+            //     Debug.Log("timer: " + _timer);
+            //     print("enemy attacked");
+            //     inRange[0].TakeDamage(_damage);
+            //     
+            // }
+           
+            _timer = _cooldownTime;
+        }
+    }
+    
+    void EvaluateType(ScriptablePathogen _path)
+    {
+        print("reevaluating");
+        _anim.Play(_path.animation.name);
+        _damage = _path.damage;
+        _speedmod = _path.speed;
+        enemyType = _path.enemyType;
+        _cooldownTime = _path.coolDown;
+        health = _path.health;
+        _timer = _path.coolDown;
+    }
+    
     public void TakeDamage(int dmg)
     {
         health -= dmg;
@@ -45,6 +81,7 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
 }
 public enum EnemyTypes
 {
