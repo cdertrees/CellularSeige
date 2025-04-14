@@ -30,9 +30,10 @@ public class Unit : MonoBehaviour
         Attack();
     }
 
-    void ReevaluateType(ScriptableUnit _unit)
+    void ReevaluateType(ScriptableUnit unitTemp)
     {
-        print("reevaluating");
+        var _unit = Instantiate(unitTemp);
+        print("reevaluating unit!");
         _anim.Play(_unit.animation.name);
         if (_unit.damages.Count == TotalDamages)
         {
@@ -77,8 +78,10 @@ public class Unit : MonoBehaviour
                 var pathogen = pathogensPresent[pathogensPresent.Count-1];
                 var damage = _unitDamages[(int)pathogen.enemyType];
                 pathogen.TakeDamage(damage);
+                
             }
             
+           
            
             _timer = _cooldownTime;
         }

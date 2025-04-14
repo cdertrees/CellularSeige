@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TestPathogen
   m_EditorClassIdentifier: 
   enemyType: 0
-  health: 2
+  health: 1
   damage: 0.1
   coolDown: 0.1
   speed: 0

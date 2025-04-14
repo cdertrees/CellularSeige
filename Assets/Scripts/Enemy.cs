@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -48,14 +50,14 @@ public class Enemy : MonoBehaviour
             _timer -= Time.deltaTime;
         } else {
             //attack
-           
-            // if (inRange[0] != null)
-            // {
-            //     Debug.Log("timer: " + _timer);
-            //     print("enemy attacked");
-            //     inRange[0].TakeDamage(_damage);
-            //     
-            // }
+          
+            if (inRange.Count() > 0)
+            {
+         
+                print("Unit attacked");
+                inRange[0].TakeDamage(_damage);
+                
+            }
            
             _timer = _cooldownTime;
         }
@@ -63,7 +65,7 @@ public class Enemy : MonoBehaviour
     
     void EvaluateType(ScriptablePathogen _path)
     {
-        print("reevaluating");
+        print("reevaluating enemy");
         _anim.Play(_path.animation.name);
         _damage = _path.damage;
         _speedmod = _path.speed;
@@ -78,6 +80,7 @@ public class Enemy : MonoBehaviour
         health -= dmg;
         if (health <= 0)
         {
+            GameManager.inst.currentPathogens.Remove(this.GameObject());
             Destroy(gameObject);
         }
     }
