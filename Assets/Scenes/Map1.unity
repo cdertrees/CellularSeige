@@ -2684,7 +2684,9 @@ MonoBehaviour:
   moveIndex: 0
   health: 0
   enemyType: 0
+  _anim: {fileID: 0}
   pathogen: {fileID: 0}
+  _timer: 0
   inRange: []
 --- !u!212 &1945864521
 SpriteRenderer:
@@ -2918,6 +2920,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4656426466349766708, guid: 942816910352a424b8c832c2aca0da32, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4656426466349766708, guid: 942816910352a424b8c832c2aca0da32, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4656426466349766708, guid: 942816910352a424b8c832c2aca0da32, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1396650933
+      objectReference: {fileID: 0}
     - target: {fileID: 8660525856428547973, guid: 942816910352a424b8c832c2aca0da32, type: 3}
       propertyPath: 'units.Array.data[0]'
       value: 
@@ -2944,5 +2958,5 @@ SceneRoots:
   - {fileID: 817729721525513137}
   - {fileID: 1945864522}
   - {fileID: 907868660}
-  - {fileID: 3498553135082478870}
   - {fileID: 1430267998}
+  - {fileID: 3498553135082478870}

@@ -14,13 +14,16 @@ public class Unit : MonoBehaviour
     public ScriptableUnit unit;
     public List<ScriptableUnit> units;
     public List<Enemy> pathogensPresent = new List<Enemy>();
-    private Animator _anim;
+    public Animator _anim;
     private float _cooldownTime;
     private float _timer;
+    private Enemy nextTarget;
+    public GameObject Child;
+
+    private bool goForward = true;
     
     void Start()
     {
-        _anim = GetComponent<Animator>();
         ReevaluateType(unit);
     }
 
@@ -65,24 +68,38 @@ public class Unit : MonoBehaviour
     {
         if (_timer > 0)
         {
+            if (pathogensPresent.Count > 0)
+            {
+                if (pathogensPresent.Contains(nextTarget))
+                {
+                    print("movin");
+                    //Nic saved me with this one
+                    Child.transform.position = Vector3.MoveTowards(Child.transform.position, nextTarget.transform.position, Time.deltaTime*5);
+                }
+                else
+                {
+                    nextTarget = pathogensPresent[pathogensPresent.Count - 1];
+                }
+
+                
+            }
             _timer -= Time.deltaTime;
         }
         else
         {
             //attack
-            
             //change for types later
             if (pathogensPresent.Count > 0)
             {
                 print("attacked");
-                var pathogen = pathogensPresent[pathogensPresent.Count-1];
-                var damage = _unitDamages[(int)pathogen.enemyType];
-                pathogen.TakeDamage(damage);
+
+             
+                var damage = _unitDamages[(int)nextTarget.enemyType];
+                nextTarget.TakeDamage(damage);
+                nextTarget = pathogensPresent[pathogensPresent.Count-1];
                 
             }
             
-           
-           
             _timer = _cooldownTime;
         }
     }

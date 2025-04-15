@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     private float _damage = 1;
     private float _cooldownTime = 0;
     public EnemyTypes enemyType;
-    private Animator _anim;
+    public Animator _anim;
     public ScriptablePathogen pathogen;
     private float _speedmod;
     [SerializeField]private float _timer = 0;

@@ -108,6 +108,8 @@ MonoBehaviour:
   health: 1
   enemyType: 0
   pathogen: {fileID: 11400000, guid: 55df8bdba589579489986211f670f60f, type: 2}
+  _timer: 0
+  inRange: []
 --- !u!58 &3601026409325600796
 CircleCollider2D:
   m_ObjectHideFlags: 0
