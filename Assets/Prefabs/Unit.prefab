@@ -52,7 +52,17 @@ MonoBehaviour:
   unit: {fileID: 11400000, guid: 32045d4dfedb3a14d9613b8e44ca2e83, type: 2}
   units:
   - {fileID: 11400000, guid: 5a9112f20999c40418fe923e414d0b41, type: 2}
-  - {fileID: 11400000, guid: e51c8483602320145ac07ae685e0f337, type: 2}
+  - {fileID: 11400000, guid: bf5da9dcd0d13d8408ed5b8222b5cebf, type: 2}
+  - {fileID: 11400000, guid: 62060e988cb82354990f9852027e4d7a, type: 2}
+  - {fileID: 11400000, guid: 0cbef014256e7284786f9b14d623971d, type: 2}
+  - {fileID: 11400000, guid: 808c1a563e832e24db7e01759d6b4403, type: 2}
+  - {fileID: 11400000, guid: cb83c064420e887478631e29e48ce0fd, type: 2}
+  - {fileID: 11400000, guid: 553040a9a5c9f1747a1f8a0715d18e21, type: 2}
+  - {fileID: 11400000, guid: f8095a961a4d0ff4c986de4ae92e665c, type: 2}
+  - {fileID: 11400000, guid: 650047fd4e634334f801eb3e38c24c2b, type: 2}
+  - {fileID: 11400000, guid: f500eed47185f64448ffb7889d948cff, type: 2}
+  - {fileID: 11400000, guid: 031a264761d085443a88286951402519, type: 2}
+  - {fileID: 11400000, guid: 32045d4dfedb3a14d9613b8e44ca2e83, type: 2}
   pathogensPresent: []
   _anim: {fileID: 4921439874852526188}
   Child: {fileID: 2839536436279741757}
@@ -146,8 +156,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.108292736, y: 0}
-  m_Radius: 4.639182
+  m_Offset: {x: -0.18310627, y: 0}
+  m_Radius: 5.649178
 --- !u!1 &2839536436279741757
 GameObject:
   m_ObjectHideFlags: 0

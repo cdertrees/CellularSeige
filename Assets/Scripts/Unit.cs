@@ -25,6 +25,7 @@ public class Unit : MonoBehaviour
 
     public TextMeshPro tempText;
     private bool goForward = true;
+    private bool attacks = true;
     
     void Start()
     {
@@ -34,7 +35,11 @@ public class Unit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Attack();
+        
+        if (attacks)
+        {
+            Attack();
+        }
         tempText.text = "" + _health;
     }
 
@@ -53,7 +58,8 @@ public class Unit : MonoBehaviour
             Debug.LogError("Wrong Number of Damage Types!!");
         }
 
-        _cooldownTime = _unit.coolDown;
+        attacks = _unit.animation.name != "Stem";
+        _cooldownTime = (_unit.coolDown/2);
         _health = _unit.health;
         _timer = _cooldownTime;
 
@@ -71,42 +77,62 @@ public class Unit : MonoBehaviour
     
     void Attack()
     {
-        if (_timer > 0)
-        {
-            if (pathogensPresent.Count > 0)
+        
+            if (_timer > 0)
             {
-                if (pathogensPresent.Contains(nextTarget))
+                if (pathogensPresent.Count > 0 && goForward)
                 {
-                    print("movin");
-                    //Nic saved me with this one
-                    //Child.transform.position = Vector3.MoveTowards(Child.transform.position, nextTarget.transform.position, Time.deltaTime*5);
-                }
-                else
-                {
-                    nextTarget = pathogensPresent[pathogensPresent.Count - 1];
-                }
+                    if (pathogensPresent.Contains(nextTarget))
+                    {
+                        Child.transform.position = Vector3.MoveTowards(Child.transform.position, nextTarget.transform.position, Time.deltaTime*20);
+                    }
+                    else
+                    {
+                        nextTarget = pathogensPresent[pathogensPresent.Count - 1];
+                    }
 
-                
+
+                    // if (pathogensPresent.Contains(nextTarget) && goForward)
+                    // {
+                    //         Child.transform.position = Vector3.MoveTowards(Child.transform.position, nextTarget.transform.position, Time.deltaTime*5);
+                    //     //Nic saved me with this one
+                    // }
+                    // else if (!goForward)
+                    // {
+                    //     Child.transform.position = Vector3.MoveTowards(Child.transform.position, nextTarget.transform.position, Time.deltaTime*5);
+                    // }
+                    // else
+                    // {
+                    //     Child.transform.position = Vector3.MoveTowards(Child.transform.position, nextTarget.transform.position, Time.deltaTime*5);
+                    //     nextTarget = pathogensPresent[pathogensPresent.Count - 1];
+                    // }
+
+                }
+                else 
+                {
+                    Child.transform.position = Vector3.MoveTowards(Child.transform.position, transform.position, Time.deltaTime*20);
+                }
+                _timer -= Time.deltaTime;
             }
-            _timer -= Time.deltaTime;
-        }
-        else
-        {
-            //attack
-            //change for types later
-            if (pathogensPresent.Count > 0)
+            else
             {
-                print("attacked");
-
-             
-                var damage = _unitDamages[(int)nextTarget.enemyType];
-                nextTarget.TakeDamage(damage);
-                nextTarget = pathogensPresent[pathogensPresent.Count-1];
-                
-            }
             
-            _timer = _cooldownTime;
-        }
+                //attack
+                //change for types later
+                if (pathogensPresent.Count > 0 && goForward)
+                {
+                    print("attacked");
+                    var damage = _unitDamages[(int)nextTarget.enemyType];
+                    nextTarget.TakeDamage(damage);
+                    nextTarget = pathogensPresent[pathogensPresent.Count-1];
+                
+                }
+
+                goForward = !goForward;
+                _timer = _cooldownTime;
+            }   
+        
+        
     }
     
     private void OnTriggerEnter2D(Collider2D other)

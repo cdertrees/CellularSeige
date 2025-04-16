@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
     public EnemyTypes enemyType;
     public Animator _anim;
     public ScriptablePathogen pathogen;
+    
+    
     private float _speedmod;
     [SerializeField]private float _timer = 0;
 
@@ -27,7 +29,9 @@ public class Enemy : MonoBehaviour
     void Awake()
     {
         _anim = GetComponent<Animator>();
-       EvaluateType(pathogen);
+       
+        
+        EvaluateType(pathogen);
     }
 
     void Update()

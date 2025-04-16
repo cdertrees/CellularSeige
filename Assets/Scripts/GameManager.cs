@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,6 +9,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager inst;
+    
     [Header("Shop")]
     public float DNA = 100f;
     public float health = 100f;
@@ -17,20 +19,22 @@ public class GameManager : MonoBehaviour
     [Header("Enemies")] 
     public GameObject basicPathogen;
     public List<GameObject> currentPathogens;
-
+    [Header("1. Bacteria 2. Virus 3. Parasite 4. Amoeba 5. Cancer 6. Allergy 7. Fungi")] public List<ScriptablePathogen> pathogenTypes;
     [Header("Level")] 
     public List<Vector3> mapPoints;
     public LineRenderer Map;
 
     [Header("Camera")] 
     public float cameraMoveSpeed = 1;
+    
     [Header("Wave Calculations")]
     [SerializeField] float waitTime = 0.6f;
     [SerializeField]public float waveNum = 0;
       
+    public List<ScriptablePathogen> pathogenProbability;
+    
     void Start()
     {
-        
         inst = this;
         StartCoroutine("StartWave");
     }
@@ -65,6 +69,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() =>(currentPathogens.Count <= 0));
         yield return new WaitForSeconds(1f);
         //need to add in "shop" screen round between this
+        EvalWaves();
         StartCoroutine("StartWave");
 
     }
@@ -85,11 +90,45 @@ public class GameManager : MonoBehaviour
 
     public void cameraMove(bool isUp)
     {
+        if ((isUp && transform.position.y < 4.7f) || (!isUp && transform.position.y > -8f))
+        {
+            var pos = transform.position;
+            pos.y += isUp ? cameraMoveSpeed*Time.deltaTime : -cameraMoveSpeed*Time.deltaTime;
+            transform.position = pos;
+        }
         
-        var pos = transform.position;
-         pos.y += isUp ? cameraMoveSpeed*Time.deltaTime : -cameraMoveSpeed*Time.deltaTime;
-         transform.position = pos;
     }
-    
-  
+
+
+    private void FixedUpdate()
+    {
+       
+    }
+
+    private void EvalWaves()
+    {
+        if (waveNum < 6)
+        {
+            pathogenProbability.Clear();
+            //pathogenProbability = new List<ScriptablePathogen>();
+            //pathogenProbability
+        } 
+        else if (waveNum < 11)
+        {
+            
+        } 
+        else if (waveNum < 16)
+        {
+            
+        } 
+        else if (waveNum < 21)
+        {
+            
+        }
+        else
+        {
+            
+        }
+        
+    }
 }
