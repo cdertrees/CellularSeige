@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5377f2fab5f2fe744b113c2fe441252a, type: 3}
-  m_Name: StemCell
+  m_Name: Eosinophil
   m_EditorClassIdentifier: 
-  name: Stem Cell
-  health: 999999
+  name: Eosinophil
+  health: 6
   coolDown: 1
-  damages: 00000000000000000000000000000000000000000000000000000000
-  animation: {fileID: 7400000, guid: c4f4d9a315910bd4b99b8d635357b1de, type: 2}
+  damages: 02000000020000000600000002000000060000000200000002000000
+  animation: {fileID: 7400000, guid: f47ec2215b71d9b43a728b403ac3e575, type: 2}
   special: 4

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5377f2fab5f2fe744b113c2fe441252a, type: 3}
-  m_Name: StemCell
+  m_Name: Neutrophil
   m_EditorClassIdentifier: 
-  name: Stem Cell
-  health: 999999
+  name: Neutrophil
+  health: 5
   coolDown: 1
-  damages: 00000000000000000000000000000000000000000000000000000000
-  animation: {fileID: 7400000, guid: c4f4d9a315910bd4b99b8d635357b1de, type: 2}
+  damages: 03000000030000000100000001000000010000000100000003000000
+  animation: {fileID: 7400000, guid: 13f44e46b45056f4fa74f3bb918c3233, type: 2}
   special: 4

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -19,6 +20,8 @@ public class Enemy : MonoBehaviour
     private float _speedmod;
     [SerializeField]private float _timer = 0;
 
+    public TextMeshPro tempText;
+    
     public List<Unit> inRange;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -29,6 +32,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        tempText.text = health + "";
         //Move towards next point in the Line Renderer. Thank you Unity forums i love you.
         Vector2 currentPos = GameManager.inst.Map.GetPosition(moveIndex);
         transform.position = Vector2.MoveTowards(transform.position, currentPos, speed*Time.deltaTime);

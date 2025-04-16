@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.PackageManager;
 using UnityEngine;
 
@@ -20,6 +21,9 @@ public class Unit : MonoBehaviour
     private Enemy nextTarget;
     public GameObject Child;
 
+
+
+    public TextMeshPro tempText;
     private bool goForward = true;
     
     void Start()
@@ -31,6 +35,7 @@ public class Unit : MonoBehaviour
     void Update()
     {
         Attack();
+        tempText.text = "" + _health;
     }
 
     void ReevaluateType(ScriptableUnit unitTemp)
@@ -74,7 +79,7 @@ public class Unit : MonoBehaviour
                 {
                     print("movin");
                     //Nic saved me with this one
-                    Child.transform.position = Vector3.MoveTowards(Child.transform.position, nextTarget.transform.position, Time.deltaTime*5);
+                    //Child.transform.position = Vector3.MoveTowards(Child.transform.position, nextTarget.transform.position, Time.deltaTime*5);
                 }
                 else
                 {
