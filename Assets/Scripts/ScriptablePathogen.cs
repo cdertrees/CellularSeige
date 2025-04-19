@@ -12,7 +12,7 @@ public class ScriptablePathogen : ScriptableObject
     public float speed;
     public AnimationClip animation;
     public PathogenSpecial special;
-   
+    public int dnaRewarded;
 }
 public enum PathogenSpecial
 {

@@ -33,7 +33,10 @@ public class GameManager : MonoBehaviour
       
     public List<ScriptablePathogen> pathogenProbability;
 
-    [Header("UI Stuffs")] public GameObject upgradesBucket;
+    [Header("UI/Battalion Stuffs")] 
+    public GameObject upgradesBucket;
+    public Unit clickedUnit;
+    public Animator shopAnim;
     void Start()
     {
         inst = this;
@@ -42,16 +45,18 @@ public class GameManager : MonoBehaviour
     }
     
     
+    
+    
     IEnumerator StartWave()
     {
-        upgradesBucket.SetActive(false);
+        //upgradesBucket.SetActive(false);
         //Keep track of the number of waves
         waveNum++;
         EvalWaves();
         //Calculate number of enemies and their types, needs to be complicated later on w/ different enemy types
         waitTime = waitTime * 0.95f;
         float pathogenSpeed = ((1.4f * (Mathf.Pow(2, (0.35f *waveNum))))+ 1) ;
-        float pathogenNum = Mathf.Pow(2, waveNum) + 6;
+        float pathogenNum = Mathf.Pow(2, waveNum) + 4;
 
         for (int i = 0; i < pathogenNum; i++)
         {

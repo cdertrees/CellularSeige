@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     public EnemyTypes enemyType;
     public Animator _anim;
     private ScriptablePathogen pathogen;
-    
+    private int _dnaRewarded;
     
     private float _speedmod;
     [SerializeField]private float _timer = 0;
@@ -79,6 +79,7 @@ public class Enemy : MonoBehaviour
         _cooldownTime = _path.coolDown;
         health = _path.health;
         _timer = _path.coolDown;
+        _dnaRewarded = _path.dnaRewarded;
     }
     
     public void TakeDamage(int dmg)
@@ -86,6 +87,8 @@ public class Enemy : MonoBehaviour
         health -= dmg;
         if (health <= 0)
         {
+            GameManager.inst.DNA += _dnaRewarded;
+            GameManager.inst.dnaText.text = "DNA: " + GameManager.inst.DNA;
             GameManager.inst.currentPathogens.Remove(this.GameObject());
             Destroy(gameObject);
         }

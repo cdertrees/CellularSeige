@@ -585,7 +585,25 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      cellularseige_0: 8359521683164834052
+      cellularseige_1: -5148360390441595985
+      cellularseige_10: 1737032995726654266
+      cellularseige_11: 2787479593950107930
+      cellularseige_12: 3122681428371014674
+      cellularseige_13: -7824647417830742030
+      cellularseige_14: 8796698854635268441
+      cellularseige_15: -5631560615735388301
+      cellularseige_16: -4667216235751187818
+      cellularseige_17: 2661110634151812490
+      cellularseige_2: -4348052903710716619
+      cellularseige_3: -2373007208674197312
+      cellularseige_4: -1033237118045267401
+      cellularseige_5: 4450191228501396938
+      cellularseige_6: -9167995112257092121
+      cellularseige_7: 6853629780443658276
+      cellularseige_8: -7281403395257389243
+      cellularseige_9: -8362885043278396506
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

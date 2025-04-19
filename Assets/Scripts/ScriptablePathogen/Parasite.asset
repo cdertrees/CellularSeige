@@ -19,3 +19,4 @@ MonoBehaviour:
   speed: 0
   animation: {fileID: 7400000, guid: a4e62eb914d588c48abe9b4534591046, type: 2}
   special: 0
+  dnaRewarded: 1

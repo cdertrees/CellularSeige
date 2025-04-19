@@ -13,7 +13,7 @@ public class Unit : MonoBehaviour
 
     //Damages 1. Bacteria 2. Virus 3. Parasite 4. Cancer 5. Allergies 6. Fungi
     public ScriptableUnit unit;
-    public List<ScriptableUnit> units;
+   // public List<ScriptableUnit> units;
     public List<Enemy> pathogensPresent = new List<Enemy>();
     public Animator _anim;
     private float _cooldownTime;
@@ -28,7 +28,7 @@ public class Unit : MonoBehaviour
     private bool attacks = true;
     
     void Start()
-    {
+    {   
         ReevaluateType(unit);
     }
 
@@ -70,7 +70,7 @@ public class Unit : MonoBehaviour
         if (_health <= 0)
         {
             print("i died");
-            ReevaluateType(units[0]);
+            ReevaluateType(unit);
         }
     }
     
