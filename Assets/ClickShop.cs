@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ClickShop : MonoBehaviour
 {
+    public Unit unit;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,6 +18,6 @@ public class ClickShop : MonoBehaviour
 
     void OnMouseDown()
     {
-        
+        GameManager.inst.startShopping(unit);
     }
 }

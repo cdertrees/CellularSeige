@@ -35,12 +35,19 @@ public class GameManager : MonoBehaviour
 
     [Header("UI/Battalion Stuffs")] 
     public GameObject upgradesBucket;
+
+    public GameObject briansBattalion;
     public Unit clickedUnit;
-    public Animator shopAnim;
+    public bool inWave;
+    
+    //public Animator shopAnim;
     void Start()
     {
+        
         inst = this;
-        StartCoroutine("StartWave");
+        upgradesBucket.SetActive(true);
+        briansBattalion.SetActive(false);
+        //StartCoroutine("StartWave");
         
     }
     
@@ -49,7 +56,8 @@ public class GameManager : MonoBehaviour
     
     IEnumerator StartWave()
     {
-        //upgradesBucket.SetActive(false);
+        upgradesBucket.SetActive(false);
+        inWave = true;
         //Keep track of the number of waves
         waveNum++;
         EvalWaves();
@@ -79,6 +87,7 @@ public class GameManager : MonoBehaviour
         //need to add in "shop" screen round between this
       
         upgradesBucket.SetActive(true);
+        inWave = false;
     }
 
     public void PathogenEnters(int dmg)
@@ -92,7 +101,13 @@ public class GameManager : MonoBehaviour
     {
         DNA -= cost;
         dnaText.text = "DNA: " + DNA;
+    }
 
+    public void CellChanged( ScriptableUnit type)
+    {
+        clickedUnit.ReevaluateType(type);
+        briansBattalion.SetActive(false);
+        clickedUnit = null;
     }
 
     public void cameraMove(bool isUp)
@@ -107,16 +122,18 @@ public class GameManager : MonoBehaviour
         
     }
 
+
+    public void startShopping(Unit selectedUnit)
+    {
+        briansBattalion.SetActive(true);
+        clickedUnit = selectedUnit;
+    }
     public void FinishShopping()
     {
         StartCoroutine("StartWave");
     }
     
-
-    private void FixedUpdate()
-    {
-       
-    }
+    
 
     private void EvalWaves()
     {   //this is kind of weird way to do it, but gives us complete control over the makeup of each "round"

@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
@@ -43,7 +40,7 @@ public class Unit : MonoBehaviour
         tempText.text = "" + _health;
     }
 
-    void ReevaluateType(ScriptableUnit unitTemp)
+    public void ReevaluateType(ScriptableUnit unitTemp)
     {
         var _unit = Instantiate(unitTemp);
         _anim.Play(_unit.animation.name);
