@@ -32,19 +32,22 @@ public class GameManager : MonoBehaviour
     [SerializeField]public float waveNum = 0;
       
     public List<ScriptablePathogen> pathogenProbability;
-    
+
+    [Header("UI Stuffs")] public GameObject upgradesBucket;
     void Start()
     {
         inst = this;
         StartCoroutine("StartWave");
+        
     }
     
     
     IEnumerator StartWave()
     {
+        upgradesBucket.SetActive(false);
         //Keep track of the number of waves
         waveNum++;
-        
+        EvalWaves();
         //Calculate number of enemies and their types, needs to be complicated later on w/ different enemy types
         waitTime = waitTime * 0.95f;
         float pathogenSpeed = ((1.4f * (Mathf.Pow(2, (0.35f *waveNum))))+ 1) ;
@@ -69,9 +72,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() =>(currentPathogens.Count <= 0));
         yield return new WaitForSeconds(1f);
         //need to add in "shop" screen round between this
-        EvalWaves();
-        StartCoroutine("StartWave");
-
+      
+        upgradesBucket.SetActive(true);
     }
 
     public void PathogenEnters(int dmg)
@@ -90,6 +92,7 @@ public class GameManager : MonoBehaviour
 
     public void cameraMove(bool isUp)
     {
+        //move the camera within the bounds of the map
         if ((isUp && transform.position.y < 4.7f) || (!isUp && transform.position.y > -8f))
         {
             var pos = transform.position;
@@ -99,6 +102,11 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void FinishShopping()
+    {
+        StartCoroutine("StartWave");
+    }
+    
 
     private void FixedUpdate()
     {
@@ -106,29 +114,52 @@ public class GameManager : MonoBehaviour
     }
 
     private void EvalWaves()
-    {
+    {   //this is kind of weird way to do it, but gives us complete control over the makeup of each "round"
         if (waveNum < 6)
         {
             pathogenProbability.Clear();
-            //pathogenProbability = new List<ScriptablePathogen>();
+            pathogenProbability = new List<ScriptablePathogen>()
+            {
+               pathogenTypes[0]
+            };
+           print("imrunning");
             //pathogenProbability
         } 
         else if (waveNum < 11)
         {
-            
+            pathogenProbability.Clear();
+            pathogenProbability = new List<ScriptablePathogen>()
+            {
+                pathogenTypes[0], pathogenTypes[0], pathogenTypes[1],
+            };
+            print("imrunning2");
         } 
         else if (waveNum < 16)
         {
-            
+            pathogenProbability.Clear();
+            pathogenProbability = new List<ScriptablePathogen>()
+            {
+                pathogenTypes[0], pathogenTypes[0], pathogenTypes[1], pathogenTypes[1], pathogenTypes[5], pathogenTypes[6],
+            };
+            print("imrunning3");
         } 
         else if (waveNum < 21)
         {
-            
+            pathogenProbability.Clear();
+            pathogenProbability = new List<ScriptablePathogen>()
+            {
+                pathogenTypes[0], pathogenTypes[0], pathogenTypes[1], pathogenTypes[1], pathogenTypes[5], pathogenTypes[6], pathogenTypes[2],pathogenTypes[3],
+            };
         }
-        else
+        else 
         {
-            
+            pathogenProbability.Clear();
+            pathogenProbability = new List<ScriptablePathogen>()
+            {
+                pathogenTypes[0], pathogenTypes[0], pathogenTypes[1], pathogenTypes[1], pathogenTypes[5], pathogenTypes[6], pathogenTypes[2],pathogenTypes[3], pathogenTypes[4]
+            };
         }
         
+
     }
 }

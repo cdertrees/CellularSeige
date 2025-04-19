@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     private float _cooldownTime = 0;
     public EnemyTypes enemyType;
     public Animator _anim;
-    public ScriptablePathogen pathogen;
+    private ScriptablePathogen pathogen;
     
     
     private float _speedmod;
@@ -29,14 +29,14 @@ public class Enemy : MonoBehaviour
     void Awake()
     {
         _anim = GetComponent<Animator>();
-       
-        
+
+        pathogen = GameManager.inst.pathogenProbability[Random.Range(0, GameManager.inst.pathogenProbability.Count)];
         EvaluateType(pathogen);
     }
 
     void Update()
     {
-        tempText.text = health + "";
+        tempText.text = pathogen.name + "   " + health ;
         //Move towards next point in the Line Renderer. Thank you Unity forums i love you.
         Vector2 currentPos = GameManager.inst.Map.GetPosition(moveIndex);
         transform.position = Vector2.MoveTowards(transform.position, currentPos, speed*Time.deltaTime);
@@ -62,7 +62,6 @@ public class Enemy : MonoBehaviour
             if (inRange.Count() > 0)
             {
          
-                print("Unit attacked");
                 inRange[0].TakeDamage(_damage);
                 
             }
@@ -73,7 +72,6 @@ public class Enemy : MonoBehaviour
     
     void EvaluateType(ScriptablePathogen _path)
     {
-        print("reevaluating enemy");
         _anim.Play(_path.animation.name);
         _damage = _path.damage;
         _speedmod = _path.speed;

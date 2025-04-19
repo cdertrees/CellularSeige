@@ -46,7 +46,6 @@ public class Unit : MonoBehaviour
     void ReevaluateType(ScriptableUnit unitTemp)
     {
         var _unit = Instantiate(unitTemp);
-        print("reevaluating unit!");
         _anim.Play(_unit.animation.name);
         if (_unit.damages.Count == TotalDamages)
         {
@@ -124,7 +123,12 @@ public class Unit : MonoBehaviour
                     print("attacked");
                     var damage = _unitDamages[(int)nextTarget.enemyType];
                     nextTarget.TakeDamage(damage);
-                    nextTarget = pathogensPresent[pathogensPresent.Count-1];
+                    if (pathogensPresent.Count > 0)
+                    {
+                        nextTarget = pathogensPresent[pathogensPresent.Count-1];
+                        nextTarget = pathogensPresent[pathogensPresent.Count-1];
+                    }
+                   
                 
                 }
 
