@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ClickShop : MonoBehaviour
 {
-    public Unit unit;
+    public GameObject unit;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -13,7 +13,7 @@ public class ClickShop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+    
     }
 
     void OnMouseDown()

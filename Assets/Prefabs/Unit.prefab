@@ -126,7 +126,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 32768
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -273,7 +273,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5491349892775053326
 RectTransform:
   m_ObjectHideFlags: 0
@@ -513,4 +513,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12f938cd6aadb534687916341f4eb0dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unit: {fileID: 8660525856428547973}
+  unit: {fileID: 1350280727029562542}

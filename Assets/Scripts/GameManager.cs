@@ -38,7 +38,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject briansBattalion;
     public Unit clickedUnit;
+    public GameObject clickedUnitOBJ;
     public bool inWave;
+
+    [Header("WTF")] public List<string> UNITIDS;
     
     //public Animator shopAnim;
     void Start()
@@ -123,10 +126,11 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void startShopping(Unit selectedUnit)
+    public void startShopping(GameObject selectedUnit)
     {
         briansBattalion.SetActive(true);
-        clickedUnit = selectedUnit;
+        clickedUnitOBJ = selectedUnit;
+        clickedUnit = selectedUnit.GetComponent<Unit>();
     }
     public void FinishShopping()
     {
