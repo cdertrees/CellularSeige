@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     public GameObject clickedUnitOBJ;
     public bool inWave;
 
-    [Header("WTF")] public List<string> UNITIDS;
+    public ScriptableUnit nextChanged;
     
     //public Animator shopAnim;
     void Start()
@@ -102,15 +102,23 @@ public class GameManager : MonoBehaviour
 
     public void SomethingBought(int cost)
     {
-        DNA -= cost;
-        dnaText.text = "DNA: " + DNA;
+        if ((DNA - cost >= 0))
+        {
+            DNA -= cost;
+            dnaText.text = "DNA: " + DNA;
+        
+            clickedUnit.ReevaluateType(nextChanged);
+            briansBattalion.SetActive(false);
+            clickedUnit = null;
+        }
+       
+        
+    
     }
 
-    public void CellChanged( ScriptableUnit type)
+    public void CellChanged(ScriptableUnit type)
     {
-        clickedUnit.ReevaluateType(type);
-        briansBattalion.SetActive(false);
-        clickedUnit = null;
+        nextChanged = type;
     }
 
     public void cameraMove(bool isUp)
@@ -134,6 +142,8 @@ public class GameManager : MonoBehaviour
     }
     public void FinishShopping()
     {
+        briansBattalion.SetActive(false);
+        clickedUnit = null;
         StartCoroutine("StartWave");
     }
     

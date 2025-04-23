@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Virus
   m_EditorClassIdentifier: 
   enemyType: 1
-  health: 0
-  damage: 0
-  coolDown: 0
+  health: 10
+  damage: 4
+  coolDown: 1
   speed: 0
   animation: {fileID: 7400000, guid: 355c93a2a6c575c4eabd2cf5732e6bf2, type: 2}
   special: 0
-  dnaRewarded: 1
+  dnaRewarded: 3
