@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FatCell
   m_EditorClassIdentifier: 
   name: FatCell
-  health: 20
+  health: 30
   coolDown: 1
   damages: 01000000010000000100000001000000010000000100000001000000
   animation: {fileID: 7400000, guid: 7d159279435a3f84eb5f43f16c0673ab, type: 2}

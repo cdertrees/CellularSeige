@@ -50,13 +50,23 @@ public class GameManager : MonoBehaviour
         inst = this;
         upgradesBucket.SetActive(true);
         briansBattalion.SetActive(false);
+        clickedUnit = null;
         //StartCoroutine("StartWave");
-        
+
     }
-    
-    
-    
-    
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+          cameraMove(true);
+        } else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            cameraMove(false);
+        }
+    }
+
+
     IEnumerator StartWave()
     {
         upgradesBucket.SetActive(false);
@@ -119,6 +129,7 @@ public class GameManager : MonoBehaviour
     public void CellChanged(ScriptableUnit type)
     {
         nextChanged = type;
+
     }
 
     public void cameraMove(bool isUp)
@@ -161,7 +172,7 @@ public class GameManager : MonoBehaviour
            print("imrunning");
             //pathogenProbability
         } 
-        else if (waveNum < 11)
+        else if (waveNum < 6)
         {
             pathogenProbability.Clear();
             pathogenProbability = new List<ScriptablePathogen>()
@@ -170,7 +181,7 @@ public class GameManager : MonoBehaviour
             };
             print("imrunning2");
         } 
-        else if (waveNum < 16)
+        else if (waveNum < 11)
         {
             pathogenProbability.Clear();
             pathogenProbability = new List<ScriptablePathogen>()
@@ -179,7 +190,7 @@ public class GameManager : MonoBehaviour
             };
             print("imrunning3");
         } 
-        else if (waveNum < 21)
+        else if (waveNum < 16)
         {
             pathogenProbability.Clear();
             pathogenProbability = new List<ScriptablePathogen>()

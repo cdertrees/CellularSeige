@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Monocyte
   m_EditorClassIdentifier: 
   name: Monocyte
-  health: 10
+  health: 20
   coolDown: 1
   damages: 04000000040000000200000002000000020000000200000004000000
   animation: {fileID: 7400000, guid: 97f5a61676d7ae841b5ccb9d3a1d276b, type: 2}

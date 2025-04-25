@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Eosinophil
   m_EditorClassIdentifier: 
   name: Eosinophil
-  health: 6
+  health: 16
   coolDown: 1
   damages: 02000000020000000600000002000000060000000400000002000000
   animation: {fileID: 7400000, guid: f47ec2215b71d9b43a728b403ac3e575, type: 2}

@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7af4bce647664804c8684ec0004a5aa4, type: 3}
-  m_Name: Parasite
+  m_Name: Flukeworm
   m_EditorClassIdentifier: 
   enemyType: 2
-  health: 40
+  health: 60
   damage: 10
   coolDown: 1
   speed: 0
-  animation: {fileID: 7400000, guid: a4e62eb914d588c48abe9b4534591046, type: 2}
+  animation: {fileID: 7400000, guid: 70276c6bc493e7f4ba59bd726e80faf3, type: 2}
   special: 0
   dnaRewarded: 30

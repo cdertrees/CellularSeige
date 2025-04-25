@@ -9,12 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5377f2fab5f2fe744b113c2fe441252a, type: 3}
-  m_Name: Platelet
+  m_Script: {fileID: 11500000, guid: 7af4bce647664804c8684ec0004a5aa4, type: 3}
+  m_Name: Allergy 1
   m_EditorClassIdentifier: 
-  name: Platelet
-  health: 15
+  enemyType: 0
+  health: 25
+  damage: 3
   coolDown: 1
-  damages: 00000000000000000000000000000000000000000000000000000000
-  animation: {fileID: 7400000, guid: 2c52dcfdbf92d1d4b88df35cf0891634, type: 2}
-  special: 2
+  speed: 0
+  animation: {fileID: 7400000, guid: 857475f558286d543b706c3b25ddaed0, type: 2}
+  special: 0
+  dnaRewarded: 10

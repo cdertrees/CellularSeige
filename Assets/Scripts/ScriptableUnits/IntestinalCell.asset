@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IntestinalCell
   m_EditorClassIdentifier: 
   name: Intestinal Cell
-  health: 3
+  health: 13
   coolDown: 9999999
   damages: 00000000000000000000000000000000000000000000000000000000
   animation: {fileID: 7400000, guid: d7ce9b0ea57a7fa4abba1613b7d78959, type: 2}

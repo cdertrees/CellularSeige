@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Plasma
   m_EditorClassIdentifier: 
   name: Plasma
-  health: 3
+  health: 13
   coolDown: 1
   damages: 01000000010000000100000001000000010000000100000001000000
   animation: {fileID: 7400000, guid: 621063c93abed774bb950afeca0713e5, type: 2}

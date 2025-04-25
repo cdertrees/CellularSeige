@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using NUnit.Framework;
 using TMPro;
 using UnityEngine;
 
@@ -23,15 +25,21 @@ public class Unit : MonoBehaviour
     public TextMeshPro tempText;
     private bool goForward = true;
     private bool attacks = true;
-    
+
+    public GameObject targeted;
+    public List<GameObject> Antibodies;
     void Start()
     {   
+        targeted.SetActive(false);
         ReevaluateType(unit);
+        
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         
         if (attacks)
         {
@@ -40,9 +48,34 @@ public class Unit : MonoBehaviour
         tempText.text = "" + _health;
     }
 
+    private void FixedUpdate()
+    {
+        //So poorly optimized fix pls
+        if (GameManager.inst.clickedUnit == this)
+        {
+            targeted.SetActive(true);
+        }
+        else
+        {
+            targeted.SetActive(false);
+        }
+    }
+
     public void ReevaluateType(ScriptableUnit unitTemp)
     {
+       
+        
         var _unit = Instantiate(unitTemp);
+        if (_unit.animation.name == "BCellTest")
+        {
+            Antibodies[0].SetActive(true);
+            Antibodies[1].SetActive(true);
+        }
+        else
+        {
+            Antibodies[0].SetActive(false);
+            Antibodies[1].SetActive(false);
+        }
         _anim.Play(_unit.animation.name);
         if (_unit.damages.Count == TotalDamages)
         {
@@ -54,7 +87,7 @@ public class Unit : MonoBehaviour
             Debug.LogError("Wrong Number of Damage Types!!");
         }
 
-        attacks = _unit.animation.name != "Stem";
+        attacks = _unit.animation.name != ("Stem");
         _cooldownTime = (_unit.coolDown/2);
         _health = _unit.health;
         _timer = _cooldownTime;
@@ -86,7 +119,6 @@ public class Unit : MonoBehaviour
                     {
                         nextTarget = pathogensPresent[pathogensPresent.Count - 1];
                     }
-
 
                     // if (pathogensPresent.Contains(nextTarget) && goForward)
                     // {
