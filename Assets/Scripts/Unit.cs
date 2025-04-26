@@ -79,7 +79,7 @@ public class Unit : MonoBehaviour
             print("healing");
              if (targetHeal._health < targetHeal._maxHealth)
              {
-                 targetHeal._health += 2f * Time.deltaTime;   
+                 targetHeal._health += 3 * Time.deltaTime;   
              }
              else
              {
@@ -146,12 +146,16 @@ public class Unit : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
-        _health -= dmg;
-        if (_health <= 0)
+        if (!_anim.GetCurrentAnimatorStateInfo(0).IsName("Stem"))
         {
-            print("i died");
-            ReevaluateType(unit);
+            _health -= dmg;
+            if (_health <= 0)
+            {
+                print("i died");
+                ReevaluateType(unit);
+            }
         }
+       
     }
     
     void Attack()

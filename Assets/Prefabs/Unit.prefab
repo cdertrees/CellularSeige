@@ -68,6 +68,7 @@ MonoBehaviour:
   plateletSpeed: 2
   Healing: 0
   targetHeal: {fileID: 0}
+  Units: []
 --- !u!212 &8657674580069907603
 SpriteRenderer:
   m_ObjectHideFlags: 0
