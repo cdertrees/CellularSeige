@@ -48,6 +48,10 @@ public class GameManager : MonoBehaviour
     public int intestinalCells = 0;
 
     public float additionalSpeedPercent=0;
+
+    public float additionalAttackSpeed = 0;
+
+    public int plasmaCells;
     //public Animator shopAnim;
     void Start()
     {
@@ -71,6 +75,12 @@ public class GameManager : MonoBehaviour
     {
         intestinalCells+= add;
         additionalSpeedPercent += 5 * add;
+    }
+
+    public void AddPlasma(int add)
+    {
+        plasmaCells += add;
+        additionalAttackSpeed += 5 * add;
     }
     
     

@@ -136,6 +136,16 @@ public class Unit : MonoBehaviour
             GameManager.inst.AddIntestinal(-1);
         }
         
+        if (_unit.special == UnitSpecial.Generate)
+        {
+            print("newplasemal" + gameObject.name);
+            GameManager.inst.AddPlasma(1);
+        } else if ( _unit.special != UnitSpecial.Generate && _anim.GetCurrentAnimatorStateInfo(0).IsName("Plasma"))
+        {
+            GameManager.inst.AddPlasma(-1);
+        }
+
+        
         if (_unit.animation.name == "BCellTest")
         {
             Antibodies[0].SetActive(true);
@@ -158,7 +168,8 @@ public class Unit : MonoBehaviour
         }
         
         attacks =( _unit.animation.name != ("Stem"))&&( _unit.animation.name != ("Platelet")) && (_unit.animation.name != ("Intestinal"));
-        _cooldownTime = (_unit.coolDown/2);
+        _cooldownTime = (_unit.coolDown/2) - ((GameManager.inst.additionalAttackSpeed/100f)* (_unit.coolDown/2) );
+        print(_cooldownTime);
         _maxHealth = _unit.health + ((GameManager.inst.additionalHealthPercent/100f) * _unit.health);
         _health = _unit.health + ((GameManager.inst.additionalHealthPercent/100f) * _unit.health);
         _timer = _cooldownTime;
