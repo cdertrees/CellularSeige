@@ -40,6 +40,9 @@ public class Unit : MonoBehaviour
 
     public Unit targetHeal;
     public List<Unit> Units;
+
+    //Fat Cell supplies
+    public float addedHealth;
     void Start()
     {
         //targetHeal = GameManager.inst.Units[0];
@@ -86,8 +89,7 @@ public class Unit : MonoBehaviour
                  Healing = false;
                  targetHeal = Units[mapPos];
              }
-               
-                
+
         }
         
         if (attacks)
@@ -112,9 +114,14 @@ public class Unit : MonoBehaviour
 
     public void ReevaluateType(ScriptableUnit unitTemp)
     {
-       
+        
         
         var _unit = Instantiate(unitTemp);
+
+        if (_unit.special == UnitSpecial.Fat)
+        {
+            GameManager.inst.AddPercent();
+        }
         if (_unit.animation.name == "BCellTest")
         {
             Antibodies[0].SetActive(true);
@@ -139,7 +146,7 @@ public class Unit : MonoBehaviour
         attacks =( _unit.animation.name != ("Stem"))&&( _unit.animation.name != ("Platelet")) ;
         _cooldownTime = (_unit.coolDown/2);
         _maxHealth = _unit.health;
-        _health = _unit.health;
+        _health = _unit.health ;
         _timer = _cooldownTime;
 
     }

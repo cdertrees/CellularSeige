@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     public ScriptableUnit nextChanged;
 
- 
+    public float additionalHealthPercent;
     
     //public Animator shopAnim;
     void Start()
@@ -54,9 +54,15 @@ public class GameManager : MonoBehaviour
         briansBattalion.SetActive(false);
         clickedUnit = null;
         //StartCoroutine("StartWave");
+        additionalHealthPercent = 0;
 
     }
 
+    public void AddPercent()
+    {
+        additionalHealthPercent = 5;
+    }
+    
     private void Update()
     {
         if (Input.GetKey(KeyCode.UpArrow))

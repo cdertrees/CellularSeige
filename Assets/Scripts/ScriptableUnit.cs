@@ -24,5 +24,6 @@ public enum UnitSpecial
     Antibodies,
     Heal,
     Generate,
+    Fat,
     None
 }
