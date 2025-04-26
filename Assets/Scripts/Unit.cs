@@ -7,6 +7,7 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     public float _health;
+    public float _maxHealth;
     private List<int> _unitDamages = new List<int>();
     private const int TotalDamages = 7;
 
@@ -20,26 +21,74 @@ public class Unit : MonoBehaviour
     private Enemy nextTarget;
     public GameObject Child;
 
-
+    
 
     public TextMeshPro tempText;
     private bool goForward = true;
     private bool attacks = true;
 
     public GameObject targeted;
+    
+    
     public List<GameObject> Antibodies;
+    
+    public Map map;
+    private int mapPos = 0;
+    public int plateletSpeed = 2;
+    //private int pos;
+    public bool Healing = false;
+
+    public Unit targetHeal;
+    public List<Unit> Units;
     void Start()
-    {   
+    {
+        //targetHeal = GameManager.inst.Units[0];
         targeted.SetActive(false);
         ReevaluateType(unit);
-        
-        
+        //mapPos = pos;
+        // print( gameObject.name + Units[0]);
+        targetHeal = Units[0];
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Platelet")&& !Healing)
+        {
+           
+            Vector2 currentPos = map.path[mapPos];
+            transform.position = Vector2.MoveTowards(transform.position, currentPos, plateletSpeed*Time.deltaTime);
+            float distance = Vector2.Distance(currentPos, transform.position);
+            if (distance <= 0.05f)
+            {
+                mapPos++;
+                if (mapPos >= map.path.Count)
+                {
+                    
+                    mapPos = 0;
+                }
+                Healing = true;
+                
+            }
+
+            
+            
+        }
+        if (Healing)
+        {
+            print("healing");
+             if (targetHeal._health < targetHeal._maxHealth)
+             {
+                 targetHeal._health += 2f * Time.deltaTime;   
+             }
+             else
+             {
+                 Healing = false;
+                 targetHeal = Units[mapPos];
+             }
+               
+                
+        }
         
         if (attacks)
         {
@@ -86,9 +135,10 @@ public class Unit : MonoBehaviour
         {
             Debug.LogError("Wrong Number of Damage Types!!");
         }
-
-        attacks = _unit.animation.name != ("Stem");
+        
+        attacks =( _unit.animation.name != ("Stem"))&&( _unit.animation.name != ("Platelet")) ;
         _cooldownTime = (_unit.coolDown/2);
+        _maxHealth = _unit.health;
         _health = _unit.health;
         _timer = _cooldownTime;
 

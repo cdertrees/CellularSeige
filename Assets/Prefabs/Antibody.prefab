@@ -139,4 +139,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitTime: 1
   Antigen: {fileID: 6073090519465568285, guid: 838cfbb9ddcb7b2488bbaaf0f49e45a1, type: 3}
+  offset: 0
   EnemiesPresent: []

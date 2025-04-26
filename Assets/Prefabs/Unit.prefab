@@ -54,6 +54,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 0
+  _maxHealth: 0
   unit: {fileID: 11400000, guid: 5a9112f20999c40418fe923e414d0b41, type: 2}
   pathogensPresent: []
   _anim: {fileID: 4921439874852526188}
@@ -63,6 +64,10 @@ MonoBehaviour:
   Antibodies:
   - {fileID: 4712471089249465842}
   - {fileID: 7869098141049010833}
+  map: {fileID: 0}
+  plateletSpeed: 2
+  Healing: 0
+  targetHeal: {fileID: 0}
 --- !u!212 &8657674580069907603
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -424,7 +429,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5491349892775053326
 RectTransform:
   m_ObjectHideFlags: 0
@@ -782,7 +787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 950385814570914513, guid: 5e0af51d7ad43024183f2b030e69a51a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.16
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 950385814570914513, guid: 5e0af51d7ad43024183f2b030e69a51a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -869,7 +874,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 950385814570914513, guid: 5e0af51d7ad43024183f2b030e69a51a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.14
+      value: -4.9
       objectReference: {fileID: 0}
     - target: {fileID: 950385814570914513, guid: 5e0af51d7ad43024183f2b030e69a51a, type: 3}
       propertyPath: m_LocalPosition.y

@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
     public bool inWave;
 
     public ScriptableUnit nextChanged;
+
+ 
     
     //public Animator shopAnim;
     void Start()
