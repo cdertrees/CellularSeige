@@ -41,10 +41,14 @@ public class Unit : MonoBehaviour
     public Unit targetHeal;
     public List<Unit> Units;
 
+    public AudioSource AS;
+    public AudioClip Heal;
+    
     //Fat Cell supplies
     public float addedHealth;
     void Start()
     {
+        AS = GetComponent<AudioSource>();
         //targetHeal = GameManager.inst.Units[0];
         targeted.SetActive(false);
         ReevaluateType(unit);
@@ -64,12 +68,14 @@ public class Unit : MonoBehaviour
             float distance = Vector2.Distance(currentPos, transform.position);
             if (distance <= 0.05f)
             {
+                
                 mapPos++;
                 if (mapPos >= map.path.Count)
                 {
                     
                     mapPos = 0;
                 }
+                AS.PlayOneShot(Heal);
                 Healing = true;
                 
             }
@@ -79,6 +85,7 @@ public class Unit : MonoBehaviour
         }
         if (Healing)
         {
+            
             print("healing");
              if (targetHeal._health < targetHeal._maxHealth)
              {
@@ -86,6 +93,7 @@ public class Unit : MonoBehaviour
              }
              else
              {
+                 AS.Stop();
                  Healing = false;
                  targetHeal = Units[mapPos];
              }

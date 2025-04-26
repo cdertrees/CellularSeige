@@ -51,6 +51,8 @@ public class GameManager : MonoBehaviour
 
     public float additionalAttackSpeed = 0;
 
+    public AudioSource AS;
+    public AudioClip click;
     public int plasmaCells;
     //public Animator shopAnim;
     void Start()
@@ -143,9 +145,10 @@ public class GameManager : MonoBehaviour
     {
         if ((DNA - cost >= 0))
         {
+            
+            AS.PlayOneShot(click);
             DNA -= cost;
             dnaText.text = "DNA: " + DNA;
-        
             clickedUnit.ReevaluateType(nextChanged);
             briansBattalion.SetActive(false);
             clickedUnit = null;
@@ -176,6 +179,7 @@ public class GameManager : MonoBehaviour
 
     public void startShopping(GameObject selectedUnit)
     {
+        AS.PlayOneShot(click);
         briansBattalion.SetActive(true);
         clickedUnitOBJ = selectedUnit;
         clickedUnit = selectedUnit.GetComponent<Unit>();
