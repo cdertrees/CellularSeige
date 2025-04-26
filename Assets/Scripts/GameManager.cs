@@ -44,7 +44,10 @@ public class GameManager : MonoBehaviour
     public ScriptableUnit nextChanged;
 
     public float additionalHealthPercent;
-    
+    public int fatCells = 0;
+    public int intestinalCells = 0;
+
+    public float additionalSpeedPercent=0;
     //public Animator shopAnim;
     void Start()
     {
@@ -58,10 +61,18 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void AddPercent()
+    public void AddPercent(int add)
     {
-        additionalHealthPercent = 5;
+        fatCells += add;
+        additionalHealthPercent += 5*add;
     }
+
+    public void AddIntestinal(int add)
+    {
+        intestinalCells+= add;
+        additionalSpeedPercent += 5 * add;
+    }
+    
     
     private void Update()
     {
@@ -84,7 +95,7 @@ public class GameManager : MonoBehaviour
         EvalWaves();
         //Calculate number of enemies and their types, needs to be complicated later on w/ different enemy types
         waitTime = waitTime * 0.95f;
-        float pathogenSpeed = ((1.4f * (Mathf.Pow(2, (0.35f *waveNum))))+ 1) ;
+        float pathogenSpeed = ((1.4f * (Mathf.Pow(2, (0.35f *waveNum))))+ 1) - ((additionalSpeedPercent/100)*((1.4f * (Mathf.Pow(2, (0.35f *waveNum))))+ 1));
         float pathogenNum = Mathf.Pow(2, waveNum) + 4;
 
         for (int i = 0; i < pathogenNum; i++)

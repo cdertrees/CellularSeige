@@ -23,11 +23,8 @@ public class Antibody : MonoBehaviour
     {
         
         yield return new WaitForSeconds(waitTime);
-        
-        print("WOULD SPAWN ANTIGEN");
         if (EnemiesPresent.Count > 0)
         {
-            print("SPAWN ANTIGEN");
             var anti = Instantiate(Antigen, transform.position, Quaternion.identity); 
             var antiScript = anti.GetComponent<antigen>();
             antiScript.target = EnemiesPresent[EnemiesPresent.Count - 1];

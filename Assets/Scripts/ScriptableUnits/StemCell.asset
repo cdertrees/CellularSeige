@@ -17,4 +17,4 @@ MonoBehaviour:
   coolDown: 1
   damages: 00000000000000000000000000000000000000000000000000000000
   animation: {fileID: 7400000, guid: c4f4d9a315910bd4b99b8d635357b1de, type: 2}
-  special: 4
+  special: 5

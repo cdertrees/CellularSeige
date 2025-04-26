@@ -115,13 +115,27 @@ public class Unit : MonoBehaviour
     public void ReevaluateType(ScriptableUnit unitTemp)
     {
         
-        
         var _unit = Instantiate(unitTemp);
 
         if (_unit.special == UnitSpecial.Fat)
         {
-            GameManager.inst.AddPercent();
+            print("newfatcell" + gameObject.name);
+            GameManager.inst.AddPercent(1);
+        } else if ( _unit.special != UnitSpecial.Fat && _anim.GetCurrentAnimatorStateInfo(0).IsName("Fat"))
+        {
+            print("fat cell die");
+            GameManager.inst.AddPercent(-1);   
         }
+
+        if (_unit.special == UnitSpecial.Slow)
+        {
+            print("newintestinal" + gameObject.name);
+            GameManager.inst.AddIntestinal(1);
+        } else if ( _unit.special != UnitSpecial.Slow && _anim.GetCurrentAnimatorStateInfo(0).IsName("Intestinal"))
+        {
+            GameManager.inst.AddIntestinal(-1);
+        }
+        
         if (_unit.animation.name == "BCellTest")
         {
             Antibodies[0].SetActive(true);
@@ -143,10 +157,10 @@ public class Unit : MonoBehaviour
             Debug.LogError("Wrong Number of Damage Types!!");
         }
         
-        attacks =( _unit.animation.name != ("Stem"))&&( _unit.animation.name != ("Platelet")) ;
+        attacks =( _unit.animation.name != ("Stem"))&&( _unit.animation.name != ("Platelet")) && (_unit.animation.name != ("Intestinal"));
         _cooldownTime = (_unit.coolDown/2);
-        _maxHealth = _unit.health;
-        _health = _unit.health ;
+        _maxHealth = _unit.health + ((GameManager.inst.additionalHealthPercent/100f) * _unit.health);
+        _health = _unit.health + ((GameManager.inst.additionalHealthPercent/100f) * _unit.health);
         _timer = _cooldownTime;
 
     }
