@@ -12,6 +12,7 @@ public class ScriptableUnit : ScriptableObject
    [Header("1. Bacteria 2. Virus 3. Parasite 4. Amoeba 5. Cancer 6. Allergy 7. Fungi")]public List<int> damages;
    public AnimationClip animation;
    public UnitSpecial special ;
+   
 }
 public enum AttackType
 {

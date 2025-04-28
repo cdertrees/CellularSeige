@@ -41,6 +41,9 @@ public class GameManager : MonoBehaviour
     public GameObject clickedUnitOBJ;
     public bool inWave;
 
+    public TextMeshProUGUI brianText;
+    
+    [Header("AH")] 
     public ScriptableUnit nextChanged;
 
     public float additionalHealthPercent;
@@ -57,7 +60,7 @@ public class GameManager : MonoBehaviour
     //public Animator shopAnim;
     void Start()
     {
-        
+        brianText.text = "";
         inst = this;
         upgradesBucket.SetActive(true);
         briansBattalion.SetActive(false);
@@ -176,6 +179,10 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void changeBrianText(string info)
+    {
+        brianText.text = info;
+    }
 
     public void startShopping(GameObject selectedUnit)
     {
