@@ -5,6 +5,7 @@ using TMPro;
 using Unity.Mathematics;
 using Unity.Mathematics.Geometry;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -140,8 +141,13 @@ public class GameManager : MonoBehaviour
     public void PathogenEnters(int dmg)
     {
         //Take Damage (Refers to the ORGAN not the individual unit.)
+        
         health -= dmg;
         healthText.text = "HEALTH: " + health;
+        if (health >= 0)
+        {
+            SceneManager.LoadScene("End");
+        }
     }
 
     public void SomethingBought(int cost)
