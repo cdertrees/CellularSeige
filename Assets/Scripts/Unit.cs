@@ -28,7 +28,7 @@ public class Unit : MonoBehaviour
     private bool attacks = true;
 
     public GameObject targeted;
-    
+    public GameObject mask;
     
     public List<GameObject> Antibodies;
     
@@ -50,6 +50,7 @@ public class Unit : MonoBehaviour
     {
         AS = GetComponent<AudioSource>();
         //targetHeal = GameManager.inst.Units[0];
+        mask.SetActive(false);
         targeted.SetActive(false);
         ReevaluateType(unit);
         //mapPos = pos;
@@ -112,10 +113,12 @@ public class Unit : MonoBehaviour
         //So poorly optimized fix pls
         if (GameManager.inst.clickedUnit == this)
         {
+            mask.SetActive(true);
             targeted.SetActive(true);
         }
         else
         {
+            mask.SetActive(false);
             targeted.SetActive(false);
         }
     }
@@ -124,7 +127,7 @@ public class Unit : MonoBehaviour
     {
         
         var _unit = Instantiate(unitTemp);
-
+        Child.transform.localPosition = new Vector3(0, 0, 0);
         if (_unit.special == UnitSpecial.Fat)
         {
             print("newfatcell" + gameObject.name);

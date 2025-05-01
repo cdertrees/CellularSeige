@@ -62,6 +62,7 @@ MonoBehaviour:
   Child: {fileID: 2839536436279741757}
   tempText: {fileID: 9070796746857466621}
   targeted: {fileID: 6735546370620663981}
+  mask: {fileID: 4152445862624557409}
   Antibodies:
   - {fileID: 4712471089249465842}
   - {fileID: 7869098141049010833}
@@ -531,7 +532,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5491349892775053326
 RectTransform:
   m_ObjectHideFlags: 0
@@ -625,8 +626,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278192127
-  m_fontColor: {r: 1, g: 0.026182856, b: 0, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

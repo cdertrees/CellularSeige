@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
 using Unity.Mathematics.Geometry;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -92,6 +93,11 @@ public class GameManager : MonoBehaviour
     
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+        }
+        
         if (Input.GetKey(KeyCode.UpArrow))
         {
           cameraMove(true);
@@ -144,7 +150,7 @@ public class GameManager : MonoBehaviour
         
         health -= dmg;
         healthText.text = "HEALTH: " + health;
-        if (health >= 0)
+        if (health <= 0)
         {
             SceneManager.LoadScene("End");
         }
@@ -208,8 +214,13 @@ public class GameManager : MonoBehaviour
 
     private void EvalWaves()
     {   //this is kind of weird way to do it, but gives us complete control over the makeup of each "round"
-        if (waveNum < 6)
+        if (waveNum < 3)
         {
+            if (waveNum == 1)
+            {
+                brianText.text = "These guys are single celled organisms! They can be both helpful and harmful to your body. These bacteria are definitely harmful though!";
+            }
+            
             pathogenProbability.Clear();
             pathogenProbability = new List<ScriptablePathogen>()
             {
@@ -220,6 +231,10 @@ public class GameManager : MonoBehaviour
         } 
         else if (waveNum < 6)
         {
+            if (waveNum ==3)
+            {
+                brianText.text = "Viruses are tiny microscopic organisms that can’t reproduce on their own! They go into organisms and use their equipment to reproduce and make more viruses! They are so small they are 100 to 1 '000 smaller than your cells! Something cool about viruses is that scientists can’t even classify them under the current conditions of being alive!";
+            }
             pathogenProbability.Clear();
             pathogenProbability = new List<ScriptablePathogen>()
             {
@@ -227,8 +242,25 @@ public class GameManager : MonoBehaviour
             };
             print("imrunning2");
         } 
+        else if (waveNum < 9)
+        {
+            if (waveNum ==6)
+            {
+                brianText.text = "Fungi are a type of living creature that are easily identified by their way of spreading and growing through spores. They can become dangerous and infect your body if these spores are able to spread and grow on or inside you!";
+            }
+            pathogenProbability.Clear();
+            pathogenProbability = new List<ScriptablePathogen>()
+            {
+                pathogenTypes[0], pathogenTypes[0], pathogenTypes[1], pathogenTypes[1], pathogenTypes[6],
+            };
+            print("imrunning3");
+        } 
         else if (waveNum < 11)
         {
+            if (waveNum == 9)
+            {
+                brianText.text = "Allergies are actually not harmful! However, your body thinks they are harmful pathogens here to attack the body and thus attack back and try and defend your body.";
+            }
             pathogenProbability.Clear();
             pathogenProbability = new List<ScriptablePathogen>()
             {
@@ -236,8 +268,24 @@ public class GameManager : MonoBehaviour
             };
             print("imrunning3");
         } 
+        else if (waveNum < 14)
+        {
+            if (waveNum == 11)
+            {
+                brianText.text = "Amoeba are a unicellular organism that are easily identifiable by their ability to form false feet! They are able to use extensions of their body to move around in what scientists think is one of the most primitive forms of animal locomotion. They are also one of the three types of parasites that can afflict your body!";
+            }
+            pathogenProbability.Clear();
+            pathogenProbability = new List<ScriptablePathogen>()
+            {
+                pathogenTypes[0], pathogenTypes[0], pathogenTypes[1], pathogenTypes[1], pathogenTypes[5], pathogenTypes[6], pathogenTypes[3],
+            };
+        }
         else if (waveNum < 16)
         {
+            if (waveNum == 11)
+            {
+                brianText.text = "Parasites are a type of organism that needs a host to survive and reproduce. One of the three types of parasites are made primarily of worms that live in your digestive tract! They eat and take nutrients from your body as well reproduce and can even grow to be around 39 inches!";
+            }
             pathogenProbability.Clear();
             pathogenProbability = new List<ScriptablePathogen>()
             {
@@ -246,6 +294,10 @@ public class GameManager : MonoBehaviour
         }
         else 
         {
+            if (waveNum ==  16)
+            {
+                brianText.text = "Cancer is very dangerous and happens when your cells start reproducing and creating abnormal cells! This creates tumors which are clusters of these malfunctioning cells and can spread around the body!";
+            }
             pathogenProbability.Clear();
             pathogenProbability = new List<ScriptablePathogen>()
             {
