@@ -16,7 +16,7 @@ public class Unit : MonoBehaviour
    // public List<ScriptableUnit> units;
     public List<Enemy> pathogensPresent = new List<Enemy>();
     public Animator _anim;
-    private float _cooldownTime;
+    public float _cooldownTime;
     private float _timer;
     private Enemy nextTarget;
     public GameObject Child;
@@ -43,6 +43,10 @@ public class Unit : MonoBehaviour
 
     public AudioSource AS;
     public AudioClip Heal;
+
+    public Vector2 ogPosition;
+
+    public GameObject healthBar;
     
     //Fat Cell supplies
     public float addedHealth;
@@ -52,10 +56,12 @@ public class Unit : MonoBehaviour
         //targetHeal = GameManager.inst.Units[0];
         mask.SetActive(false);
         targeted.SetActive(false);
+        ogPosition = transform.position;
         ReevaluateType(unit);
         //mapPos = pos;
         // print( gameObject.name + Units[0]);
         targetHeal = Units[0];
+      
     }
 
     // Update is called once per frame
@@ -86,7 +92,7 @@ public class Unit : MonoBehaviour
         }
         if (Healing)
         {
-            
+            targetHeal.calcHealthBar();
             print("healing");
              if (targetHeal._health < targetHeal._maxHealth)
              {
@@ -121,13 +127,24 @@ public class Unit : MonoBehaviour
             mask.SetActive(false);
             targeted.SetActive(false);
         }
+        
+        //calcHealthBar();
+        
     }
 
     public void ReevaluateType(ScriptableUnit unitTemp)
     {
+
+ 
+        if(_anim.GetCurrentAnimatorStateInfo(0).IsName("Platelet")){transform.position = ogPosition;}
+        
+        
         
         var _unit = Instantiate(unitTemp);
         Child.transform.localPosition = new Vector3(0, 0, 0);
+
+        //transform.position = ogPosition;
+        
         if (_unit.special == UnitSpecial.Fat)
         {
             print("newfatcell" + gameObject.name);
@@ -177,21 +194,46 @@ public class Unit : MonoBehaviour
         {
             Debug.LogError("Wrong Number of Damage Types!!");
         }
-        
+
+       
         attacks =( _unit.animation.name != ("Stem"))&&( _unit.animation.name != ("Platelet")) && (_unit.animation.name != ("Intestinal"));
         _cooldownTime = (_unit.coolDown/2) - ((GameManager.inst.additionalAttackSpeed/100f)* (_unit.coolDown/2) );
         print(_cooldownTime);
         _maxHealth = _unit.health + ((GameManager.inst.additionalHealthPercent/100f) * _unit.health);
         _health = _unit.health + ((GameManager.inst.additionalHealthPercent/100f) * _unit.health);
         _timer = _cooldownTime;
+        
+        //calc health
+        
+        //between 0 and 5 (-5)
+        // for 10 health guy
+        // if health 0, its 0
+        //if health is 5, its 2.5
+        // if health is 10, it's 5
+
+        calcHealthBar();
 
     }
 
+    public void calcHealthBar()
+    {
+        float healthIncrement = 5 / _maxHealth;
+        float position = (healthIncrement * _health) - 5;
+        position = Mathf.Clamp(position, -5, 0);
+        var barpos = healthBar.transform.localPosition;
+        barpos.x = position;
+        print(barpos.x);
+        
+        healthBar.transform.localPosition = barpos;
+    }
+    
+    
     public void TakeDamage(float dmg)
     {
         if (!_anim.GetCurrentAnimatorStateInfo(0).IsName("Stem"))
         {
             _health -= dmg;
+            calcHealthBar();
             if (_health <= 0)
             {
                 print("i died");
@@ -264,7 +306,12 @@ public class Unit : MonoBehaviour
         
         
     }
-    
+
+    public void Reset()
+    {
+        ReevaluateType(unit);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag.Equals("Pathogen"))

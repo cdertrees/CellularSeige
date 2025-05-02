@@ -59,6 +59,17 @@ public class GameManager : MonoBehaviour
     public AudioSource AS;
     public AudioClip click;
     public int plasmaCells;
+
+    public TextMeshProUGUI speedUpgradeTxt;
+    public TextMeshProUGUI defenseUpgradeTxt;
+        
+    
+    public int speedUpgradeCost = 5;
+    public int defenseUpgradeCost = 5;
+    
+    
+    public GameObject UpgradeMenu;
+    
     //public Animator shopAnim;
     void Start()
     {
@@ -196,12 +207,26 @@ public class GameManager : MonoBehaviour
         brianText.text = info;
     }
 
+    public void resetUnit()
+    {
+        UpgradeMenu.SetActive(false);
+        clickedUnit.Reset();
+    }
+    
     public void startShopping(GameObject selectedUnit)
     {
         AS.PlayOneShot(click);
         briansBattalion.SetActive(true);
         clickedUnitOBJ = selectedUnit;
         clickedUnit = selectedUnit.GetComponent<Unit>();
+        if (!clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Stem"))
+        {
+            UpgradeMenu.SetActive(true);
+        }
+        else
+        {
+            UpgradeMenu.SetActive(false);
+        }
     }
     public void FinishShopping()
     {
@@ -209,9 +234,40 @@ public class GameManager : MonoBehaviour
         clickedUnit = null;
         StartCoroutine("StartWave");
     }
-    
-    
 
+
+    public void purchaseSpeedUpgrade()
+    {
+        if ((DNA - speedUpgradeCost) >=0)
+        {
+            DNA -= speedUpgradeCost;
+            dnaText.text = "DNA: " + DNA;
+            AS.PlayOneShot(click);
+            clickedUnit._cooldownTime = clickedUnit._cooldownTime - (clickedUnit._cooldownTime * 0.05f);
+            speedUpgradeCost = (speedUpgradeCost * 2);
+            speedUpgradeTxt.text = "Increase speed by 5%\nCosts "+ speedUpgradeCost+" DNA";
+        }
+       
+        
+    }
+
+    public void purchaseDefenseUpgrade()
+    {
+        if ((DNA - defenseUpgradeCost) >=0)
+        {
+            DNA -= defenseUpgradeCost;
+            dnaText.text = "DNA: " + DNA;
+            AS.PlayOneShot(click);
+            clickedUnit._health = clickedUnit._health + (clickedUnit._health * 0.05f);
+            clickedUnit._maxHealth = clickedUnit._maxHealth + (clickedUnit._maxHealth * 0.05f);
+            clickedUnit.calcHealthBar();
+            defenseUpgradeCost = (defenseUpgradeCost * 2);
+            defenseUpgradeTxt.text = "Increase health by 5%\nCosts "+ defenseUpgradeCost+" DNA";
+        }
+    }
+    
+    
+    
     private void EvalWaves()
     {   //this is kind of weird way to do it, but gives us complete control over the makeup of each "round"
         if (waveNum < 3)
