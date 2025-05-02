@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
     public bool inWave;
 
     public TextMeshProUGUI brianText;
+    public TextMeshProUGUI rupertText;
     
     [Header("AH")] 
     public ScriptableUnit nextChanged;
@@ -69,11 +70,14 @@ public class GameManager : MonoBehaviour
     public int OffenseUpgradeCost = 5;
     
     public GameObject UpgradeMenu;
+
+    public AudioSource music;
     
     //public Animator shopAnim;
     void Start()
     {
         brianText.text = "";
+        rupertText.text = "";
         inst = this;
         upgradesBucket.SetActive(true);
         briansBattalion.SetActive(false);
@@ -107,6 +111,14 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+            if (Time.timeScale == 0)
+            {
+                music.Pause();
+            }
+            else
+            {
+                music.Play();
+            }
         }
         
         if (Input.GetKey(KeyCode.UpArrow))
@@ -207,6 +219,11 @@ public class GameManager : MonoBehaviour
         brianText.text = info;
     }
 
+    public void changeRupertText(string info)
+    {
+        rupertText.text = info;
+    }
+    
     public void resetUnit()
     {
         UpgradeMenu.SetActive(false);
