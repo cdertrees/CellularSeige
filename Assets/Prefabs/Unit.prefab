@@ -146,9 +146,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 0
   _maxHealth: 0
+  _unitDamages: 
   unit: {fileID: 11400000, guid: 5a9112f20999c40418fe923e414d0b41, type: 2}
   pathogensPresent: []
   _anim: {fileID: 4921439874852526188}
+  _cooldownTime: 0
   Child: {fileID: 2839536436279741757}
   tempText: {fileID: 9070796746857466621}
   targeted: {fileID: 6735546370620663981}
@@ -163,6 +165,7 @@ MonoBehaviour:
   Units: []
   AS: {fileID: 0}
   Heal: {fileID: 8300000, guid: f8d0c7f7e54c06e4caea85654abf2fd8, type: 3}
+  ogPosition: {x: 0, y: 0}
   healthBar: {fileID: 84480588820153284}
   addedHealth: 0
 --- !u!212 &8657674580069907603

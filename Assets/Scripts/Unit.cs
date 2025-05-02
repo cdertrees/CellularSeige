@@ -8,7 +8,7 @@ public class Unit : MonoBehaviour
 {
     public float _health;
     public float _maxHealth;
-    private List<int> _unitDamages = new List<int>();
+    public List<float> _unitDamages = new List<float>();
     private const int TotalDamages = 7;
 
     //Damages 1. Bacteria 2. Virus 3. Parasite 4. Cancer 5. Allergies 6. Fungi
@@ -188,7 +188,7 @@ public class Unit : MonoBehaviour
         if (_unit.damages.Count == TotalDamages)
         {
             _unitDamages.Clear();
-            _unitDamages = _unit.damages;
+            _unitDamages = _unit.damages.ConvertAll(i => (float)i);
         }
         else
         {

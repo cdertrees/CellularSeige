@@ -62,11 +62,11 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI speedUpgradeTxt;
     public TextMeshProUGUI defenseUpgradeTxt;
-        
+    public TextMeshProUGUI offenseUpgradeTxt;
     
     public int speedUpgradeCost = 5;
     public int defenseUpgradeCost = 5;
-    
+    public int OffenseUpgradeCost = 5;
     
     public GameObject UpgradeMenu;
     
@@ -266,7 +266,25 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    
+    public void purchaseOffenseUpgrade()
+    {
+        print("p");
+        if ((DNA - OffenseUpgradeCost) >=0)
+        {
+            DNA -= OffenseUpgradeCost;
+            dnaText.text = "DNA: " + DNA;
+            AS.PlayOneShot(click);
+            for (int i = 0; i<clickedUnit._unitDamages.Count; i++)
+            {
+                var temp = (clickedUnit._unitDamages[i]) + (clickedUnit._unitDamages[i] * 0.05f);
+                clickedUnit._unitDamages[i] = temp;
+            }
+            //clickedUnit = clickedUnit._health + (clickedUnit._health * 0.05f);
+            OffenseUpgradeCost = (OffenseUpgradeCost * 2);
+            offenseUpgradeTxt.text = "Increase health by 5%\nCosts "+ OffenseUpgradeCost+" DNA";
+        }
+    }
+
     
     private void EvalWaves()
     {   //this is kind of weird way to do it, but gives us complete control over the makeup of each "round"
