@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Flukeworm
   m_EditorClassIdentifier: 
   enemyType: 2
-  health: 60
-  damage: 10
+  health: 30
+  damage: 5
   coolDown: 1
   speed: 0
   animation: {fileID: 7400000, guid: 70276c6bc493e7f4ba59bd726e80faf3, type: 2}

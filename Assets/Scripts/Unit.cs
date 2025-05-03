@@ -21,7 +21,10 @@ public class Unit : MonoBehaviour
     private Enemy nextTarget;
     public GameObject Child;
 
-    
+    public int speedUpgradeCost = 5;
+    public int defenseUpgradeCost = 5;
+    public int OffenseUpgradeCost = 5;
+
 
     public TextMeshPro tempText;
     private bool goForward = true;
@@ -33,7 +36,7 @@ public class Unit : MonoBehaviour
     public List<GameObject> Antibodies;
     
     public Map map;
-    private int mapPos = 0;
+    public int mapPos = 0;
     public int plateletSpeed = 2;
     //private int pos;
     public bool Healing = false;
@@ -49,6 +52,9 @@ public class Unit : MonoBehaviour
     public Vector2 ogPosition;
 
     public GameObject healthBar;
+
+
+    
     
     //Fat Cell supplies
     public float addedHealth;
@@ -63,6 +69,7 @@ public class Unit : MonoBehaviour
         //mapPos = pos;
         // print( gameObject.name + Units[0]);
         targetHeal = Units[0];
+       
       
     }
 
@@ -111,6 +118,10 @@ public class Unit : MonoBehaviour
 
             }
         }
+        else
+        {
+            AS.Stop();
+        }
        
         
         if (attacks)
@@ -141,8 +152,11 @@ public class Unit : MonoBehaviour
     public void ReevaluateType(ScriptableUnit unitTemp)
     {
 
- 
-        if(_anim.GetCurrentAnimatorStateInfo(0).IsName("Platelet")){transform.position = ogPosition;}
+
+        if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Platelet"))
+        {
+            transform.position = ogPosition;
+        }
         
         
         
@@ -242,6 +256,7 @@ public class Unit : MonoBehaviour
             calcHealthBar();
             if (_health <= 0)
             {
+                
                 print("i died");
                 ReevaluateType(unit);
             }
@@ -296,7 +311,11 @@ public class Unit : MonoBehaviour
                 {
                     AS.PlayOneShot(attackSound);
                     var damage = _unitDamages[(int)nextTarget.enemyType];
-                    nextTarget.TakeDamage(damage);
+
+                    if (nextTarget)
+                    {
+                        nextTarget.TakeDamage(damage);
+                    }
                     if (pathogensPresent.Count > 0)
                     {
                         nextTarget = pathogensPresent[pathogensPresent.Count-1];

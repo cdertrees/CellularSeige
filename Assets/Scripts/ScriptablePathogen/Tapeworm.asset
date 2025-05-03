@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Tapeworm
   m_EditorClassIdentifier: 
   enemyType: 2
-  health: 40
-  damage: 10
+  health: 30
+  damage: 5
   coolDown: 1
   speed: 0
   animation: {fileID: 7400000, guid: a4e62eb914d588c48abe9b4534591046, type: 2}

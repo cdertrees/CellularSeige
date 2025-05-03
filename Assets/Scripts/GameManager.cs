@@ -13,6 +13,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager inst;
     
+    public static int timesAttacked = 0;
+    public static int pathsKilled = 0;
+    public static int upgradesPurchased = 0;
+    public static int unitsPlaced = 0;
+    
     [Header("Shop")]
     public float DNA = 100f;
     public float health = 100f;
@@ -66,10 +71,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI defenseUpgradeTxt;
     public TextMeshProUGUI offenseUpgradeTxt;
     
-    public int speedUpgradeCost = 5;
-    public int defenseUpgradeCost = 5;
-    public int OffenseUpgradeCost = 5;
-    
+   
     public GameObject UpgradeMenu;
 
     public AudioSource music;
@@ -124,10 +126,10 @@ public class GameManager : MonoBehaviour
             }
         }
         
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
         {
           cameraMove(true);
-        } else if (Input.GetKey(KeyCode.DownArrow))
+        } else if (Input.GetKey(KeyCode.DownArrow)|| Input.GetKey(KeyCode.S))
         {
             cameraMove(false);
         }
@@ -143,8 +145,8 @@ public class GameManager : MonoBehaviour
         EvalWaves();
         //Calculate number of enemies and their types, needs to be complicated later on w/ different enemy types
         waitTime = waitTime * 0.95f;
-        float pathogenSpeed = ((1.4f * (Mathf.Pow(2, (0.35f *waveNum))))+ 1) - ((additionalSpeedPercent/100)*((1.4f * (Mathf.Pow(2, (0.35f *waveNum))))+ 1));
-        float pathogenNum = Mathf.Pow(2, waveNum) + 4;
+        float pathogenSpeed = ((1f * (Mathf.Pow(2, (0.25f *waveNum))))+ 1) - ((additionalSpeedPercent/100)*((1f * (Mathf.Pow(2, (0.25f *waveNum))))+ 1));
+        float pathogenNum = Mathf.Pow(1.5f, waveNum) + 2;
 
         for (int i = 0; i < pathogenNum; i++)
         {
@@ -155,7 +157,7 @@ public class GameManager : MonoBehaviour
             //add to list : )
             currentPathogens.Add(pathogen);
             //change speed
-            pathogenScript.speed = pathogenSpeed;
+            pathogenScript.speed = Mathf.Abs(pathogenSpeed);
             //wait for next one
             yield return new WaitForSeconds(waitTime);
             
@@ -183,11 +185,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void end(){SceneManager.LoadScene("End");}
+    
+    
     public void SomethingBought(int cost)
     {
         if ((DNA - cost >= 0))
         {
-            
+            unitsPlaced++;
             AS.PlayOneShot(click);
             DNA -= cost;
             dnaText.text = "DNA: " + DNA;
@@ -244,12 +249,18 @@ public class GameManager : MonoBehaviour
         if (!clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Stem"))
         {
             UpgradeMenu.SetActive(true);
+            speedUpgradeTxt.text = "Increase speed by 5%\nCosts "+ clickedUnit.speedUpgradeCost+" DNA";
+            defenseUpgradeTxt.text = "Increase health by 5%\nCosts "+ clickedUnit.defenseUpgradeCost+" DNA";
+            offenseUpgradeTxt.text = "Increase health by 5%\nCosts "+ clickedUnit.OffenseUpgradeCost+" DNA";
         }
         else
         {
             UpgradeMenu.SetActive(false);
         }
     }
+    
+    
+    
     public void FinishShopping()
     {
         briansBattalion.SetActive(false);
@@ -266,14 +277,15 @@ public class GameManager : MonoBehaviour
 
     public void purchaseSpeedUpgrade()
     {
-        if ((DNA - speedUpgradeCost) >=0)
+        if ((DNA - clickedUnit.speedUpgradeCost) >=0)
         {
-            DNA -= speedUpgradeCost;
+            DNA -= clickedUnit.speedUpgradeCost;
             dnaText.text = "DNA: " + DNA;
             AS.PlayOneShot(click);
             clickedUnit._cooldownTime = clickedUnit._cooldownTime - (clickedUnit._cooldownTime * 0.05f);
-            speedUpgradeCost = (speedUpgradeCost * 2);
-            speedUpgradeTxt.text = "Increase speed by 5%\nCosts "+ speedUpgradeCost+" DNA";
+            clickedUnit.speedUpgradeCost = (clickedUnit.speedUpgradeCost * 2);
+            speedUpgradeTxt.text = "Increase speed by 5%\nCosts "+ clickedUnit.speedUpgradeCost+" DNA";
+            upgradesPurchased++;
         }
        
         
@@ -281,25 +293,26 @@ public class GameManager : MonoBehaviour
 
     public void purchaseDefenseUpgrade()
     {
-        if ((DNA - defenseUpgradeCost) >=0)
+        if ((DNA - clickedUnit.defenseUpgradeCost) >=0)
         {
-            DNA -= defenseUpgradeCost;
+            DNA -= clickedUnit.defenseUpgradeCost;
             dnaText.text = "DNA: " + DNA;
             AS.PlayOneShot(click);
             clickedUnit._health = clickedUnit._health + (clickedUnit._health * 0.05f);
             clickedUnit._maxHealth = clickedUnit._maxHealth + (clickedUnit._maxHealth * 0.05f);
             clickedUnit.calcHealthBar();
-            defenseUpgradeCost = (defenseUpgradeCost * 2);
-            defenseUpgradeTxt.text = "Increase health by 5%\nCosts "+ defenseUpgradeCost+" DNA";
+            clickedUnit.defenseUpgradeCost = (clickedUnit.defenseUpgradeCost * 2);
+            defenseUpgradeTxt.text = "Increase health by 5%\nCosts "+ clickedUnit.defenseUpgradeCost+" DNA";
+            upgradesPurchased++;
         }
     }
     
     public void purchaseOffenseUpgrade()
     {
         print("p");
-        if ((DNA - OffenseUpgradeCost) >=0)
+        if ((DNA - clickedUnit.OffenseUpgradeCost) >=0)
         {
-            DNA -= OffenseUpgradeCost;
+            DNA -= clickedUnit.OffenseUpgradeCost;
             dnaText.text = "DNA: " + DNA;
             AS.PlayOneShot(click);
             for (int i = 0; i<clickedUnit._unitDamages.Count; i++)
@@ -308,8 +321,9 @@ public class GameManager : MonoBehaviour
                 clickedUnit._unitDamages[i] = temp;
             }
             //clickedUnit = clickedUnit._health + (clickedUnit._health * 0.05f);
-            OffenseUpgradeCost = (OffenseUpgradeCost * 2);
-            offenseUpgradeTxt.text = "Increase health by 5%\nCosts "+ OffenseUpgradeCost+" DNA";
+            clickedUnit.OffenseUpgradeCost = (clickedUnit.OffenseUpgradeCost * 2);
+            offenseUpgradeTxt.text = "Increase health by 5%\nCosts "+ clickedUnit.OffenseUpgradeCost+" DNA";
+            upgradesPurchased++;
         }
     }
 
@@ -335,7 +349,8 @@ public class GameManager : MonoBehaviour
         {
             if (waveNum ==3)
             {
-                brianText.text = "Viruses are tiny microscopic organisms that can’t reproduce on their own! They go into organisms and use their equipment to reproduce and make more viruses! They are so small they are 100 to 1 '000 smaller than your cells! Something cool about viruses is that scientists can’t even classify them under the current conditions of being alive!";
+                brianText.text = "Viruses are tiny microscopic organisms that can’t reproduce on their own! They go into organisms and use their equipment to reproduce and make more viruses! They are so small they are 100 to 1,000x smaller than your cells!";
+                // Something cool about viruses is that scientists can’t even classify them under the current conditions of being alive!
             }
             pathogenProbability.Clear();
             pathogenProbability = new List<ScriptablePathogen>()

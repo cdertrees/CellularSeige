@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Platelet
   m_EditorClassIdentifier: 
   name: Platelet
-  health: 15
+  health: 35
   coolDown: 1
   damages: 00000000000000000000000000000000000000000000000000000000
   animation: {fileID: 7400000, guid: 2c52dcfdbf92d1d4b88df35cf0891634, type: 2}

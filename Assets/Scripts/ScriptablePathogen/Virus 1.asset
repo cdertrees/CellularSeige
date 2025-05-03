@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Virus 1
   m_EditorClassIdentifier: 
   enemyType: 1
-  health: 7
-  damage: 6
+  health: 5
+  damage: 2
   coolDown: 1
   speed: 0
   animation: {fileID: 7400000, guid: e4fb241632201d54e953f76c616bb239, type: 2}

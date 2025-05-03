@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Amoeba
   m_EditorClassIdentifier: 
   enemyType: 3
-  health: 40
-  damage: 10
+  health: 20
+  damage: 5
   coolDown: 1
   speed: 0
-  animation: {fileID: 7400000, guid: 0cbbdd72f3a57104fa5f9a61a5952b1a, type: 2}
+  animation: {fileID: 7400000, guid: 8b0fbec7c8c422c4db4af7d9cd9bc412, type: 2}
   special: 0
   dnaRewarded: 30

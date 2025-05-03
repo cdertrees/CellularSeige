@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Neutrophil
   m_EditorClassIdentifier: 
   name: Neutrophil
-  health: 15
+  health: 25
   coolDown: 1
-  damages: 04000000040000000300000003000000030000000300000004000000
+  damages: 06000000060000000500000005000000050000000500000006000000
   animation: {fileID: 7400000, guid: 13f44e46b45056f4fa74f3bb918c3233, type: 2}
   special: 5

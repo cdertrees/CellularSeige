@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
     private ScriptablePathogen pathogen;
     private int _dnaRewarded;
     
-    private float _speedmod;
+   // private float _speedmod;
     [SerializeField]private float _timer = 0;
 
     public TextMeshPro tempText;
@@ -32,6 +32,11 @@ public class Enemy : MonoBehaviour
 
         pathogen = GameManager.inst.pathogenProbability[Random.Range(0, GameManager.inst.pathogenProbability.Count)];
         EvaluateType(pathogen);
+    }
+
+    private void Start()
+    {
+  
     }
 
     void Update()
@@ -74,7 +79,7 @@ public class Enemy : MonoBehaviour
     {
         _anim.Play(_path.animation.name);
         _damage = _path.damage;
-        _speedmod = _path.speed;
+        //_speedmod = _path.speed;
         enemyType = _path.enemyType;
         _cooldownTime = _path.coolDown;
         health = _path.health;
@@ -90,6 +95,7 @@ public class Enemy : MonoBehaviour
             GameManager.inst.DNA += _dnaRewarded;
             GameManager.inst.dnaText.text = "DNA: " + GameManager.inst.DNA;
             GameManager.inst.currentPathogens.Remove(this.GameObject());
+            GameManager.pathsKilled++;
             Destroy(gameObject);
         }
     }

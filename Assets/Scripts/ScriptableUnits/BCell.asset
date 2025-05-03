@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: BCell
   m_EditorClassIdentifier: 
   name: B Cell
-  health: 16
+  health: 26
   coolDown: 1
-  damages: 01000000010000000100000001000000010000000100000001000000
+  damages: 03000000030000000300000003000000030000000300000003000000
   animation: {fileID: 7400000, guid: a5e4aff3cea579643a15f5fedea41f67, type: 2}
   special: 1

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 0
   health: 15
-  damage: 5
+  damage: 3
   coolDown: 1
   speed: 0
   animation: {fileID: 7400000, guid: 6bb874b5236515d48b307a6a9d92d152, type: 2}

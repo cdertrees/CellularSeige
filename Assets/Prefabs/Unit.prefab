@@ -159,6 +159,7 @@ MonoBehaviour:
   - {fileID: 4712471089249465842}
   - {fileID: 7869098141049010833}
   map: {fileID: 0}
+  mapPos: 0
   plateletSpeed: 2
   Healing: 0
   targetHeal: {fileID: 0}

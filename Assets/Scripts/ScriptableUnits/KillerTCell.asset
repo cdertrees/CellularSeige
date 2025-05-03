@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: KillerTCell
   m_EditorClassIdentifier: 
   name: Killer T-Cell
-  health: 16
+  health: 26
   coolDown: 0.6
-  damages: 0a0000000a0000000a0000000a0000000a0000000a0000000a000000
+  damages: 14000000140000001400000014000000140000001400000014000000
   animation: {fileID: 7400000, guid: 7007b38988742be45b96e3d2fb2b1646, type: 2}
   special: 0
