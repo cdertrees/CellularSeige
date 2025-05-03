@@ -43,7 +43,9 @@ public class Unit : MonoBehaviour
 
     public AudioSource AS;
     public AudioClip Heal;
-
+    public AudioClip attackSound;
+    
+    
     public Vector2 ogPosition;
 
     public GameObject healthBar;
@@ -67,45 +69,49 @@ public class Unit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Platelet")&& !Healing)
+        if (GameManager.inst.inWave)
         {
-           
-            Vector2 currentPos = map.path[mapPos];
-            transform.position = Vector2.MoveTowards(transform.position, currentPos, plateletSpeed*Time.deltaTime);
-            float distance = Vector2.Distance(currentPos, transform.position);
-            if (distance <= 0.05f)
+            if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Platelet")&& !Healing)
             {
-                
-                mapPos++;
-                if (mapPos >= map.path.Count)
+           
+                Vector2 currentPos = map.path[mapPos];
+                transform.position = Vector2.MoveTowards(transform.position, currentPos, plateletSpeed*Time.deltaTime);
+                float distance = Vector2.Distance(currentPos, transform.position);
+                if (distance <= 0.05f)
                 {
-                    
-                    mapPos = 0;
-                }
-                AS.PlayOneShot(Heal);
-                Healing = true;
                 
+                    mapPos++;
+                    if (mapPos >= map.path.Count)
+                    {
+                    
+                        mapPos = 0;
+                    }
+                    AS.PlayOneShot(Heal);
+                    Healing = true;
+                
+                }
+
+            
+            
             }
+            if (Healing)
+            {
+                targetHeal.calcHealthBar();
+                print("healing");
+                if (targetHeal._health < targetHeal._maxHealth)
+                {
+                    targetHeal._health += 3 * Time.deltaTime;   
+                }
+                else
+                {
+                    AS.Stop();
+                    Healing = false;
+                    targetHeal = Units[mapPos];
+                }
 
-            
-            
+            }
         }
-        if (Healing)
-        {
-            targetHeal.calcHealthBar();
-            print("healing");
-             if (targetHeal._health < targetHeal._maxHealth)
-             {
-                 targetHeal._health += 3 * Time.deltaTime;   
-             }
-             else
-             {
-                 AS.Stop();
-                 Healing = false;
-                 targetHeal = Units[mapPos];
-             }
-
-        }
+       
         
         if (attacks)
         {
@@ -288,7 +294,7 @@ public class Unit : MonoBehaviour
                 //change for types later
                 if (pathogensPresent.Count > 0 && goForward)
                 {
-                    print("attacked");
+                    AS.PlayOneShot(attackSound);
                     var damage = _unitDamages[(int)nextTarget.enemyType];
                     nextTarget.TakeDamage(damage);
                     if (pathogensPresent.Count > 0)

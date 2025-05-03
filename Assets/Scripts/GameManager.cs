@@ -6,6 +6,7 @@ using Unity.Mathematics;
 using Unity.Mathematics.Geometry;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -72,6 +73,8 @@ public class GameManager : MonoBehaviour
     public GameObject UpgradeMenu;
 
     public AudioSource music;
+
+    public static int score = 0;
     
     //public Animator shopAnim;
     void Start()
@@ -175,6 +178,7 @@ public class GameManager : MonoBehaviour
         healthText.text = "HEALTH: " + health;
         if (health <= 0)
         {
+            score = (int)waveNum;
             SceneManager.LoadScene("End");
         }
     }
@@ -189,6 +193,7 @@ public class GameManager : MonoBehaviour
             dnaText.text = "DNA: " + DNA;
             clickedUnit.ReevaluateType(nextChanged);
             briansBattalion.SetActive(false);
+            rupertText.text = "";
             clickedUnit = null;
         }
        
@@ -248,10 +253,16 @@ public class GameManager : MonoBehaviour
     public void FinishShopping()
     {
         briansBattalion.SetActive(false);
+        
         clickedUnit = null;
         StartCoroutine("StartWave");
     }
 
+
+    public void Unclick()
+    {
+        clickedUnit = null;
+    }
 
     public void purchaseSpeedUpgrade()
     {
