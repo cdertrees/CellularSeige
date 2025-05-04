@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour
     //public Animator shopAnim;
     void Start()
     {
+        StartCoroutine("GainDNA");
         brianText.text = "";
         rupertText.text = "";
         inst = this;
@@ -89,6 +90,15 @@ public class GameManager : MonoBehaviour
         clickedUnit = null;
         //StartCoroutine("StartWave");
         additionalHealthPercent = 0;
+
+    }
+
+    IEnumerator GainDNA()
+    {
+        yield return new WaitForSeconds(30f);
+        DNA++;
+        dnaText.text = "DNA: " + DNA;
+        StartCoroutine("GainDNA");
 
     }
 
