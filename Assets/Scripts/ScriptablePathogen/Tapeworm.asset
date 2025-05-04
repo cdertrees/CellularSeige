@@ -17,6 +17,6 @@ MonoBehaviour:
   damage: 5
   coolDown: 1
   speed: 0
-  animation: {fileID: 7400000, guid: a4e62eb914d588c48abe9b4534591046, type: 2}
+  animation: {fileID: 7400000, guid: 1a8acdedcba3e3c46ba2b1f666c1b13d, type: 2}
   special: 0
   dnaRewarded: 30

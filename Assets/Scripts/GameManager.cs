@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     
     [Header("Wave Calculations")]
     [SerializeField] float waitTime = 0.6f;
-    [SerializeField]public float waveNum = 0;
+    public static float waveNum = 0;
       
     public List<ScriptablePathogen> pathogenProbability;
 
@@ -155,7 +155,8 @@ public class GameManager : MonoBehaviour
         EvalWaves();
         //Calculate number of enemies and their types, needs to be complicated later on w/ different enemy types
         waitTime = waitTime * 0.95f;
-        float pathogenSpeed = ((1f * (Mathf.Pow(2, (0.25f *waveNum))))+ 1) - ((additionalSpeedPercent/100)*((1f * (Mathf.Pow(2, (0.25f *waveNum))))+ 1));
+        //((1f * (Mathf.Pow(2, (0.25f *waveNum))))+ 1) - ((additionalSpeedPercent/100)*((1f * (Mathf.Pow(2, (0.25f *waveNum))))+ 1))
+        float pathogenSpeed = 4;
         float pathogenNum = Mathf.Pow(1.5f, waveNum) + 2;
 
         for (int i = 0; i < pathogenNum; i++)

@@ -18,7 +18,10 @@ public class Enemy : MonoBehaviour
     public Animator _anim;
     private ScriptablePathogen pathogen;
     private int _dnaRewarded;
-    
+
+    public AudioSource AS;
+
+    public AudioClip alert;
    // private float _speedmod;
     [SerializeField]private float _timer = 0;
 
@@ -36,7 +39,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-  
+       // AS.PlayOneShot(alert);
     }
 
     void Update()
@@ -89,6 +92,7 @@ public class Enemy : MonoBehaviour
     
     public void TakeDamage(float dmg)
     {
+        GameManager.timesAttacked++;
         health -= dmg;
         if (health <= 0)
         {

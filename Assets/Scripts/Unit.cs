@@ -223,6 +223,9 @@ public class Unit : MonoBehaviour
         _health = _unit.health + ((GameManager.inst.additionalHealthPercent/100f) * _unit.health);
         _timer = _cooldownTime;
         
+        speedUpgradeCost = 5;
+        defenseUpgradeCost = 5;
+        OffenseUpgradeCost = 5;
         //calc health
         
         //between 0 and 5 (-5)
