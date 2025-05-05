@@ -80,7 +80,7 @@ public class Enemy : MonoBehaviour
     
     void EvaluateType(ScriptablePathogen _path)
     {
-        _anim.Play(_path.animation.name);
+        _anim.Play(_path.anims[Random.Range(0,_path.anims.Count)].name);
         _damage = _path.damage;
         //_speedmod = _path.speed;
         enemyType = _path.enemyType;

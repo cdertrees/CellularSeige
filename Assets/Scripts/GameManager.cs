@@ -77,6 +77,51 @@ public class GameManager : MonoBehaviour
     public AudioSource music;
 
     public static int score = 0;
+
+    public List<Unit> Basophils;
+    public List<Unit> BCells;
+    public List<Unit> Eosinophils;
+    public List<Unit> FatCells;
+    public List<Unit> IntestinalCells;
+    public List<Unit> KillerTCells;
+    public List<Unit> Monocytes;
+    public List<Unit> Neutrophils;
+    public List<Unit> Plasmas;
+    public List<Unit> SmoothMuscles;
+    public List<Unit> Platelets;
+    
+    public int basophilDefenseUpgradeCost = 5;
+    public int basophilOffenseUpgradeCost = 5;
+    
+    public int bCellDefenseUpgradeCost = 5;
+    public int bCellOffenseUpgradeCost = 5;
+    
+    public int eosDefenseUpgradeCost = 5;
+    public int eosOffenseUpgradeCost = 5;
+    
+    public int fatDefenseUpgradeCost = 5;
+    public int fatOffenseUpgradeCost = 5;
+    
+    public int intestinalDefenseUpgradeCost = 5;
+    public int intestinalOffenseUpgradeCost = 5;
+    
+    public int killerDefenseUpgradeCost = 5;
+    public int killerOffenseUpgradeCost = 5;
+    
+    public int monoDefenseUpgradeCost = 5;
+    public int monoOffenseUpgradeCost = 5;
+    
+    public int neutroDefenseUpgradeCost = 5;
+    public int neutroOffenseUpgradeCost = 5;
+    
+    public int plasmaDefenseUpgradeCost = 5;
+    public int plasmaOffenseUpgradeCost = 5;
+    
+    public int muscleDefenseUpgradeCost = 5;
+    public int muscleOffenseUpgradeCost = 5;
+    
+    public int plateletDefenseUpgradeCost = 5;
+    public int plateletOffenseUpgradeCost = 5;
     
     //public Animator shopAnim;
     void Start()
@@ -253,16 +298,80 @@ public class GameManager : MonoBehaviour
     
     public void startShopping(GameObject selectedUnit)
     {
+      
+        
         AS.PlayOneShot(click);
         briansBattalion.SetActive(true);
         clickedUnitOBJ = selectedUnit;
         clickedUnit = selectedUnit.GetComponent<Unit>();
         if (!clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Stem"))
         {
+            int defCost = 0;
+            int offCost = 0;
+             if (clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Basophil"))
+            {
+                defCost = basophilDefenseUpgradeCost;
+                offCost = basophilOffenseUpgradeCost;
+            } 
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("BCellTest"))
+
+            {
+                defCost = bCellDefenseUpgradeCost;
+                offCost = bCellOffenseUpgradeCost;
+            } 
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Eosinophil"))
+
+            {
+                defCost = eosDefenseUpgradeCost;
+                offCost = eosOffenseUpgradeCost;
+            } else if (clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Fat"))
+            {
+                defCost = fatDefenseUpgradeCost;
+                offCost = fatOffenseUpgradeCost;
+            } else if (clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Intestinal"))
+            {
+                defCost = intestinalDefenseUpgradeCost;
+                offCost = intestinalOffenseUpgradeCost;
+            } else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("KillerT"))
+
+            {
+                defCost = killerDefenseUpgradeCost;
+                offCost = killerOffenseUpgradeCost;
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Monocyte"))
+
+            {
+                defCost = monoDefenseUpgradeCost;
+                offCost = monoOffenseUpgradeCost;
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Neutrophil"))
+
+            {
+                defCost = neutroDefenseUpgradeCost;
+                offCost = neutroOffenseUpgradeCost;
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Plasma"))
+
+            {
+                defCost = plasmaDefenseUpgradeCost;
+                offCost = plasmaOffenseUpgradeCost;
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Platelet"))
+
+            {
+                defCost = plateletDefenseUpgradeCost;
+                offCost = plateletOffenseUpgradeCost;
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("SmoothMuscle"))
+
+            {
+                defCost = muscleDefenseUpgradeCost;
+                offCost = muscleOffenseUpgradeCost;
+            }
             UpgradeMenu.SetActive(true);
-            speedUpgradeTxt.text = "Increase speed by 5%\nCosts "+ clickedUnit.speedUpgradeCost+" DNA";
-            defenseUpgradeTxt.text = "Increase health by 5%\nCosts "+ clickedUnit.defenseUpgradeCost+" DNA";
-            offenseUpgradeTxt.text = "Increase health by 5%\nCosts "+ clickedUnit.OffenseUpgradeCost+" DNA";
+            //speedUpgradeTxt.text = "Increase speed by 5%\nCosts "+ clickedUnit.speedUpgradeCost+" DNA";
+            defenseUpgradeTxt.text = "Increase health by 5%\nCosts "+ defCost+" DNA";
+            offenseUpgradeTxt.text = "Increase health by 5%\nCosts "+ offCost+" DNA";
         }
         else
         {
@@ -286,56 +395,359 @@ public class GameManager : MonoBehaviour
         clickedUnit = null;
     }
 
-    public void purchaseSpeedUpgrade()
-    {
-        if ((DNA - clickedUnit.speedUpgradeCost) >=0)
-        {
-            DNA -= clickedUnit.speedUpgradeCost;
-            dnaText.text = "DNA: " + DNA;
-            AS.PlayOneShot(click);
-            clickedUnit._cooldownTime = clickedUnit._cooldownTime - (clickedUnit._cooldownTime * 0.05f);
-            clickedUnit.speedUpgradeCost = (clickedUnit.speedUpgradeCost * 2);
-            speedUpgradeTxt.text = "Increase speed by 5%\nCosts "+ clickedUnit.speedUpgradeCost+" DNA";
-            upgradesPurchased++;
-        }
-       
-        
-    }
+    // public void purchaseSpeedUpgrade()
+    // {
+    //     
+    //     if ((DNA - clickedUnit.speedUpgradeCost) >=0)
+    //     {
+    //         DNA -= clickedUnit.speedUpgradeCost;
+    //         dnaText.text = "DNA: " + DNA;
+    //         AS.PlayOneShot(click);
+    //         clickedUnit._cooldownTime = clickedUnit._cooldownTime - (clickedUnit._cooldownTime * 0.05f);
+    //         clickedUnit.speedUpgradeCost = (clickedUnit.speedUpgradeCost * 2);
+    //         speedUpgradeTxt.text = "Increase speed by 5%\nCosts "+ clickedUnit.speedUpgradeCost+" DNA";
+    //         upgradesPurchased++;
+    //     }
+    //    
+    //     
+    // }
 
     public void purchaseDefenseUpgrade()
     {
-        if ((DNA - clickedUnit.defenseUpgradeCost) >=0)
+        int defCost = 0;
+        int offCost = 0;
+        List<Unit> unitList = new List<Unit>();
+         if (clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Basophil"))
+            {
+                defCost = basophilDefenseUpgradeCost;
+                offCost = basophilOffenseUpgradeCost;
+                unitList = Basophils;
+            } 
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("BCellTest"))
+
+            {
+                defCost = bCellDefenseUpgradeCost;
+                offCost = bCellOffenseUpgradeCost;
+                unitList = BCells;
+            } 
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Eosinophil"))
+
+            {
+                defCost = eosDefenseUpgradeCost;
+                offCost = eosOffenseUpgradeCost;
+                unitList = Eosinophils;
+            } else if (clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Fat"))
+            {
+                defCost = fatDefenseUpgradeCost;
+                offCost = fatOffenseUpgradeCost;
+                unitList = FatCells;
+
+            } else if (clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Intestinal"))
+            {
+                defCost = intestinalDefenseUpgradeCost;
+                offCost = intestinalOffenseUpgradeCost;
+                unitList = IntestinalCells;
+            } else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("KillerT"))
+
+            {
+                defCost = killerDefenseUpgradeCost;
+                offCost = killerOffenseUpgradeCost;
+                unitList = KillerTCells;
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Monocyte"))
+
+            {
+                defCost = monoDefenseUpgradeCost;
+                offCost = monoOffenseUpgradeCost;
+                unitList = Monocytes;
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Neutrophil"))
+
+            {
+                defCost = neutroDefenseUpgradeCost;
+                offCost = neutroOffenseUpgradeCost;
+                unitList = Neutrophils;
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Plasma"))
+
+            {
+                defCost = plasmaDefenseUpgradeCost;
+                offCost = plasmaOffenseUpgradeCost;
+                unitList = Plasmas;
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Platelet"))
+
+            {
+                defCost = plateletDefenseUpgradeCost;
+                offCost = plateletOffenseUpgradeCost;
+                unitList = Platelets;
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("SmoothMuscle"))
+
+            {
+                defCost = muscleDefenseUpgradeCost;
+                offCost = muscleOffenseUpgradeCost;
+                unitList = SmoothMuscles;
+            }
+        if ((DNA - defCost) >=0)
         {
-            DNA -= clickedUnit.defenseUpgradeCost;
+            DNA -= defCost;
             dnaText.text = "DNA: " + DNA;
             AS.PlayOneShot(click);
-            clickedUnit._health = clickedUnit._health + (clickedUnit._health * 0.05f);
-            clickedUnit._maxHealth = clickedUnit._maxHealth + (clickedUnit._maxHealth * 0.05f);
-            clickedUnit.calcHealthBar();
-            clickedUnit.defenseUpgradeCost = (clickedUnit.defenseUpgradeCost * 2);
-            defenseUpgradeTxt.text = "Increase health by 5%\nCosts "+ clickedUnit.defenseUpgradeCost+" DNA";
+            
+            
+            
+           
+
+            foreach (var unit in unitList)
+            {
+                unit._health = unit._health + (unit._health * 0.05f);
+                unit._maxHealth = unit._maxHealth + (unit._maxHealth * 0.05f);
+                unit.calcHealthBar();
+                
+            }
+            
+            defCost = (defCost * 2);
+            defenseUpgradeTxt.text = "Increase health by 5%\nCosts "+ defCost+" DNA";
             upgradesPurchased++;
+            
+             if (clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Basophil"))
+            {
+                basophilDefenseUpgradeCost = defCost;
+               
+            } 
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("BCellTest"))
+
+            {
+                bCellDefenseUpgradeCost = defCost;
+            } 
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Eosinophil"))
+
+            {
+                eosDefenseUpgradeCost = defCost;
+                offCost = eosOffenseUpgradeCost;
+            } else if (clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Fat"))
+            {
+               fatDefenseUpgradeCost = defCost;
+     
+            } else if (clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Intestinal"))
+            {
+               intestinalDefenseUpgradeCost = defCost;
+        
+            } else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("KillerT"))
+
+            {
+               killerDefenseUpgradeCost = defCost;
+        
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Monocyte"))
+
+            { 
+                monoDefenseUpgradeCost = defCost;
+             
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Neutrophil"))
+
+            {
+                neutroDefenseUpgradeCost = defCost;
+              
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Plasma"))
+
+            {
+                plasmaDefenseUpgradeCost = defCost;
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Platelet"))
+
+            {
+                plateletDefenseUpgradeCost = defCost;
+             
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("SmoothMuscle"))
+
+            {
+               muscleDefenseUpgradeCost = defCost;
+            
+            }
+            
         }
     }
     
     public void purchaseOffenseUpgrade()
     {
-        print("p");
-        if ((DNA - clickedUnit.OffenseUpgradeCost) >=0)
+        
+        int defCost = 0;
+        int offCost = 0;
+        List<Unit> unitList = new List<Unit>();
+         if (clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Basophil"))
+            {
+                defCost = basophilDefenseUpgradeCost;
+                offCost = basophilOffenseUpgradeCost;
+                unitList = Basophils;
+            } 
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("BCellTest"))
+
+            {
+                defCost = bCellDefenseUpgradeCost;
+                offCost = bCellOffenseUpgradeCost;
+                unitList = BCells;
+            } 
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Eosinophil"))
+
+            {
+                defCost = eosDefenseUpgradeCost;
+                offCost = eosOffenseUpgradeCost;
+                unitList = Eosinophils;
+            } else if (clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Fat"))
+            {
+                defCost = fatDefenseUpgradeCost;
+                offCost = fatOffenseUpgradeCost;
+                unitList = FatCells;
+
+            } else if (clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Intestinal"))
+            {
+                defCost = intestinalDefenseUpgradeCost;
+                offCost = intestinalOffenseUpgradeCost;
+                unitList = IntestinalCells;
+            } else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("KillerT"))
+
+            {
+                defCost = killerDefenseUpgradeCost;
+                offCost = killerOffenseUpgradeCost;
+                unitList = KillerTCells;
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Monocyte"))
+
+            {
+                defCost = monoDefenseUpgradeCost;
+                offCost = monoOffenseUpgradeCost;
+                unitList = Monocytes;
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Neutrophil"))
+
+            {
+                defCost = neutroDefenseUpgradeCost;
+                offCost = neutroOffenseUpgradeCost;
+                unitList = Neutrophils;
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Plasma"))
+
+            {
+                defCost = plasmaDefenseUpgradeCost;
+                offCost = plasmaOffenseUpgradeCost;
+                unitList = Plasmas;
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Platelet"))
+
+            {
+                defCost = plateletDefenseUpgradeCost;
+                offCost = plateletOffenseUpgradeCost;
+                unitList = Platelets;
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("SmoothMuscle"))
+
+            {
+                defCost = muscleDefenseUpgradeCost;
+                offCost = muscleOffenseUpgradeCost;
+                unitList = SmoothMuscles;
+            }
+        if ((DNA - offCost) >=0)
         {
-            DNA -= clickedUnit.OffenseUpgradeCost;
+            DNA -= offCost;
             dnaText.text = "DNA: " + DNA;
             AS.PlayOneShot(click);
-            for (int i = 0; i<clickedUnit._unitDamages.Count; i++)
+      
+            foreach (var unit in unitList)
             {
-                var temp = (clickedUnit._unitDamages[i]) + (clickedUnit._unitDamages[i] * 0.05f);
-                clickedUnit._unitDamages[i] = temp;
+                for (int i = 0; i < unit._unitDamages.Count; i++)
+                {
+                    var temp = (unit._unitDamages[i]) + (unit._unitDamages[i] * 0.05f);
+                    unit._unitDamages[i] = temp;
+                }
+              
+                
             }
-            //clickedUnit = clickedUnit._health + (clickedUnit._health * 0.05f);
-            clickedUnit.OffenseUpgradeCost = (clickedUnit.OffenseUpgradeCost * 2);
-            offenseUpgradeTxt.text = "Increase health by 5%\nCosts "+ clickedUnit.OffenseUpgradeCost+" DNA";
-            upgradesPurchased++;
+            offCost = (offCost * 2);
+            offenseUpgradeTxt.text = "Increase damage by 5%\nCosts "+ offCost+" DNA";
+             upgradesPurchased++;
+            
+             if (clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Basophil"))
+            {
+                basophilOffenseUpgradeCost = offCost;
+               
+            } 
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("BCellTest"))
+
+            {
+                bCellOffenseUpgradeCost = offCost;
+            } 
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Eosinophil"))
+
+            {
+                eosOffenseUpgradeCost = offCost;
+            } else if (clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Fat"))
+            {
+                fatOffenseUpgradeCost = offCost;
+     
+            } else if (clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Intestinal"))
+            {
+                intestinalOffenseUpgradeCost = offCost;
+        
+            } else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("KillerT"))
+
+            {
+                killerOffenseUpgradeCost = offCost;
+        
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Monocyte"))
+
+            { 
+                monoOffenseUpgradeCost = offCost;
+             
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Neutrophil"))
+
+            {
+                neutroOffenseUpgradeCost = offCost;
+              
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Plasma"))
+
+            {
+                plasmaOffenseUpgradeCost = offCost;
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("Platelet"))
+
+            {
+                plateletOffenseUpgradeCost = offCost;
+             
+            }
+            else if(clickedUnit._anim.GetCurrentAnimatorStateInfo(0).IsName("SmoothMuscle"))
+
+            {
+                muscleOffenseUpgradeCost = offCost;
+            
+            }
+            
         }
+        
+        
+        
+    //     print("p");
+    //     if ((DNA - clickedUnit.OffenseUpgradeCost) >=0)
+    //     {
+    //         DNA -= clickedUnit.OffenseUpgradeCost;
+    //         dnaText.text = "DNA: " + DNA;
+    //         AS.PlayOneShot(click);
+    //         for (int i = 0; i<clickedUnit._unitDamages.Count; i++)
+    //         {
+    //             var temp = (clickedUnit._unitDamages[i]) + (clickedUnit._unitDamages[i] * 0.05f);
+    //             clickedUnit._unitDamages[i] = temp;
+    //         }
+    //         clickedUnit.OffenseUpgradeCost = (clickedUnit.OffenseUpgradeCost * 2);
+    //         offenseUpgradeTxt.text = "Increase health by 5%\nCosts "+ clickedUnit.OffenseUpgradeCost+" DNA";
+    //         upgradesPurchased++;
+    //     }
     }
 
     

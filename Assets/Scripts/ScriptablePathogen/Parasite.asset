@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7af4bce647664804c8684ec0004a5aa4, type: 3}
-  m_Name: Tapeworm
+  m_Name: Parasite
   m_EditorClassIdentifier: 
   enemyType: 2
   health: 30
@@ -18,5 +18,8 @@ MonoBehaviour:
   coolDown: 1
   speed: 0
   animation: {fileID: 7400000, guid: 1a8acdedcba3e3c46ba2b1f666c1b13d, type: 2}
+  anims:
+  - {fileID: 7400000, guid: 1a8acdedcba3e3c46ba2b1f666c1b13d, type: 2}
+  - {fileID: 7400000, guid: 7d60e72ad4869e440b3bd3b31c023d98, type: 2}
   special: 0
   dnaRewarded: 30

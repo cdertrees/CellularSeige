@@ -18,5 +18,9 @@ MonoBehaviour:
   coolDown: 1
   speed: 0
   animation: {fileID: 7400000, guid: 384fe339628d2d247b4cabde139dd47d, type: 2}
+  anims:
+  - {fileID: 7400000, guid: 384fe339628d2d247b4cabde139dd47d, type: 2}
+  - {fileID: 7400000, guid: f0365d30730991f40860b88127435d40, type: 2}
+  - {fileID: 7400000, guid: 41ff0d90f275e5c41822506b77b89500, type: 2}
   special: 0
   dnaRewarded: 10

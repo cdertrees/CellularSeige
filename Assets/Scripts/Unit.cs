@@ -21,9 +21,8 @@ public class Unit : MonoBehaviour
     private Enemy nextTarget;
     public GameObject Child;
 
-    public int speedUpgradeCost = 5;
-    public int defenseUpgradeCost = 5;
-    public int OffenseUpgradeCost = 5;
+    //public int speedUpgradeCost = 5;
+  
 
 
     public TextMeshPro tempText;
@@ -151,7 +150,59 @@ public class Unit : MonoBehaviour
 
     public void ReevaluateType(ScriptableUnit unitTemp)
     {
+        if (!_anim.GetCurrentAnimatorStateInfo(0).IsName("Stem"))
+        {
+            if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Basophil"))
+            {
+                GameManager.inst.Basophils.Remove(this);
+            } 
+            else if(_anim.GetCurrentAnimatorStateInfo(0).IsName("BCellTest"))
 
+            {
+                GameManager.inst.BCells.Remove(this);
+            } 
+            else if(_anim.GetCurrentAnimatorStateInfo(0).IsName("Eosinophil"))
+
+            {
+                GameManager.inst.Eosinophils.Remove(this);
+            } else if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Fat"))
+            {
+                GameManager.inst.FatCells.Remove(this);
+            } else if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Intestinal"))
+            {
+                GameManager.inst.IntestinalCells.Remove(this);
+            } else if(_anim.GetCurrentAnimatorStateInfo(0).IsName("KillerT"))
+
+            {
+                GameManager.inst.KillerTCells.Remove(this);
+            }
+            else if(_anim.GetCurrentAnimatorStateInfo(0).IsName("Monocyte"))
+
+            {
+                GameManager.inst.Monocytes.Remove(this);
+            }
+            else if(_anim.GetCurrentAnimatorStateInfo(0).IsName("Neutrophil"))
+
+            {
+                GameManager.inst.Neutrophils.Remove(this);
+            }
+            else if(_anim.GetCurrentAnimatorStateInfo(0).IsName("Plasma"))
+
+            {
+                GameManager.inst.Plasmas.Remove(this);
+            }
+            else if(_anim.GetCurrentAnimatorStateInfo(0).IsName("Platelet"))
+
+            {
+                GameManager.inst.Platelets.Remove(this);
+            }
+            else if(_anim.GetCurrentAnimatorStateInfo(0).IsName("SmoothMuscle"))
+
+            {
+                GameManager.inst.SmoothMuscles.Remove(this);
+            }
+            
+        }
 
         if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Platelet"))
         {
@@ -204,7 +255,11 @@ public class Unit : MonoBehaviour
             Antibodies[0].SetActive(false);
             Antibodies[1].SetActive(false);
         }
-        _anim.Play(_unit.animation.name);
+        
+        
+      
+        
+        
         if (_unit.damages.Count == TotalDamages)
         {
             _unitDamages.Clear();
@@ -222,10 +277,59 @@ public class Unit : MonoBehaviour
         _maxHealth = _unit.health + ((GameManager.inst.additionalHealthPercent/100f) * _unit.health);
         _health = _unit.health + ((GameManager.inst.additionalHealthPercent/100f) * _unit.health);
         _timer = _cooldownTime;
+        _anim.Play(_unit.animation.name);
+       print(_unit.animation.name);
+            if (_unit.animation.name == "Basophil")
+            {
+                GameManager.inst.Basophils.Add(this);
+            } 
+            else if(_unit.animation.name == "BCellTest")
+
+            {
+                GameManager.inst.BCells.Add(this);
+            } 
+            else if(_unit.animation.name == "Eosinophil")
+
+            {
+                GameManager.inst.Eosinophils.Add(this);
+            } else if (_unit.animation.name == "Fat")
+            {
+                GameManager.inst.FatCells.Add(this);
+            } else if (_unit.animation.name == "Intestinal")
+            {
+                GameManager.inst.IntestinalCells.Add(this);
+            } else if(_unit.animation.name == "KillerT")
+
+            {
+                GameManager.inst.KillerTCells.Add(this);
+            }
+            else if(_unit.animation.name == "Monocyte")
+
+            {
+                GameManager.inst.Monocytes.Add(this);
+            }
+            else if(_unit.animation.name == "Neutrophil")
+
+            {
+                GameManager.inst.Neutrophils.Add(this);
+            }
+            else if(_unit.animation.name == "Plasma")
+
+            {
+                GameManager.inst.Plasmas.Add(this);
+            }
+            else if(_unit.animation.name == "Platelet")
+
+            {
+                GameManager.inst.Platelets.Add(this);
+            }
+            else if(_unit.animation.name == "SmoothMuscle")
+
+            {
+                GameManager.inst.SmoothMuscles.Add(this);
+            }
+            
         
-        speedUpgradeCost = 5;
-        defenseUpgradeCost = 5;
-        OffenseUpgradeCost = 5;
         //calc health
         
         //between 0 and 5 (-5)

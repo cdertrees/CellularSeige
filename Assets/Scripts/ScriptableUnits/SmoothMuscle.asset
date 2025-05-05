@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Smooth Muscle
   health: 25
-  coolDown: 0
+  coolDown: 1
   damages: 04000000040000000400000004000000040000000400000004000000
   animation: {fileID: 7400000, guid: 72105ffa229542a40a00be780a9c6e5e, type: 2}
   special: 0

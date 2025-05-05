@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -11,6 +12,7 @@ public class ScriptablePathogen : ScriptableObject
     public float coolDown;
     public float speed;
     public AnimationClip animation;
+    public List<AnimationClip> anims;
     public PathogenSpecial special;
     public int dnaRewarded;
 }
