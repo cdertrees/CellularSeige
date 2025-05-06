@@ -122,6 +122,11 @@ public class GameManager : MonoBehaviour
     
     public int plateletDefenseUpgradeCost = 5;
     public int plateletOffenseUpgradeCost = 5;
+
+    public AudioSource BrianAS;
+    public List<AudioClip> BrianLines;
+
+    private float pathogenSpeed;
     
     //public Animator shopAnim;
     void Start()
@@ -135,6 +140,7 @@ public class GameManager : MonoBehaviour
         clickedUnit = null;
         //StartCoroutine("StartWave");
         additionalHealthPercent = 0;
+        pathogenSpeed = 4;
 
     }
 
@@ -201,7 +207,7 @@ public class GameManager : MonoBehaviour
         //Calculate number of enemies and their types, needs to be complicated later on w/ different enemy types
         waitTime = waitTime * 0.95f;
         //((1f * (Mathf.Pow(2, (0.25f *waveNum))))+ 1) - ((additionalSpeedPercent/100)*((1f * (Mathf.Pow(2, (0.25f *waveNum))))+ 1))
-        float pathogenSpeed = 4;
+         pathogenSpeed = pathogenSpeed * 1.07f;
         float pathogenNum = Mathf.Pow(1.5f, waveNum) + 2;
 
         for (int i = 0; i < pathogenNum; i++)
@@ -371,7 +377,7 @@ public class GameManager : MonoBehaviour
             UpgradeMenu.SetActive(true);
             //speedUpgradeTxt.text = "Increase speed by 5%\nCosts "+ clickedUnit.speedUpgradeCost+" DNA";
             defenseUpgradeTxt.text = "Increase health by 5%\nCosts "+ defCost+" DNA";
-            offenseUpgradeTxt.text = "Increase health by 5%\nCosts "+ offCost+" DNA";
+            offenseUpgradeTxt.text = "Increase damage by 5%\nCosts "+ offCost+" DNA";
         }
         else
         {
@@ -757,6 +763,7 @@ public class GameManager : MonoBehaviour
         {
             if (waveNum == 1)
             {
+                BrianAS.PlayOneShot(BrianLines[0]);
                 brianText.text = "These guys are single celled organisms! They can be both helpful and harmful to your body. These bacteria are definitely harmful though!";
             }
             
@@ -772,6 +779,7 @@ public class GameManager : MonoBehaviour
         {
             if (waveNum ==3)
             {
+                BrianAS.PlayOneShot(BrianLines[1]);
                 brianText.text = "Viruses are tiny microscopic organisms that can’t reproduce on their own! They go into organisms and use their equipment to reproduce and make more viruses! They are so small they are 100 to 1,000x smaller than your cells!";
                 // Something cool about viruses is that scientists can’t even classify them under the current conditions of being alive!
             }
@@ -786,6 +794,7 @@ public class GameManager : MonoBehaviour
         {
             if (waveNum ==6)
             {
+                BrianAS.PlayOneShot(BrianLines[2]);
                 brianText.text = "Fungi are a type of living creature that are easily identified by their way of spreading and growing through spores. They can become dangerous and infect your body if these spores are able to spread and grow on or inside you!";
             }
             pathogenProbability.Clear();
@@ -799,6 +808,7 @@ public class GameManager : MonoBehaviour
         {
             if (waveNum == 9)
             {
+                BrianAS.PlayOneShot(BrianLines[3]);
                 brianText.text = "Allergies are actually not harmful! However, your body thinks they are harmful pathogens here to attack the body and thus attack back and try and defend your body.";
             }
             pathogenProbability.Clear();
@@ -812,6 +822,7 @@ public class GameManager : MonoBehaviour
         {
             if (waveNum == 11)
             {
+                BrianAS.PlayOneShot(BrianLines[4]);
                 brianText.text = "Amoeba are a unicellular organism that are easily identifiable by their ability to form false feet! They are able to use extensions of their body to move around in what scientists think is one of the most primitive forms of animal locomotion. They are also one of the three types of parasites that can afflict your body!";
             }
             pathogenProbability.Clear();
@@ -824,6 +835,7 @@ public class GameManager : MonoBehaviour
         {
             if (waveNum == 11)
             {
+                BrianAS.PlayOneShot(BrianLines[5]);
                 brianText.text = "Parasites are a type of organism that needs a host to survive and reproduce. One of the three types of parasites are made primarily of worms that live in your digestive tract! They eat and take nutrients from your body as well reproduce and can even grow to be around 39 inches!";
             }
             pathogenProbability.Clear();
@@ -836,6 +848,7 @@ public class GameManager : MonoBehaviour
         {
             if (waveNum ==  16)
             {
+                BrianAS.PlayOneShot(BrianLines[6]);
                 brianText.text = "Cancer is very dangerous and happens when your cells start reproducing and creating abnormal cells! This creates tumors which are clusters of these malfunctioning cells and can spread around the body!";
             }
             pathogenProbability.Clear();

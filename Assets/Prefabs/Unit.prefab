@@ -152,9 +152,6 @@ MonoBehaviour:
   _anim: {fileID: 4921439874852526188}
   _cooldownTime: 0
   Child: {fileID: 2839536436279741757}
-  speedUpgradeCost: 5
-  defenseUpgradeCost: 5
-  OffenseUpgradeCost: 5
   tempText: {fileID: 9070796746857466621}
   targeted: {fileID: 6735546370620663981}
   mask: {fileID: 4152445862624557409}
