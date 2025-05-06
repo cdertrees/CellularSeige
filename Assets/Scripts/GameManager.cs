@@ -127,6 +127,9 @@ public class GameManager : MonoBehaviour
     public List<AudioClip> BrianLines;
 
     private float pathogenSpeed;
+
+    public GameObject pause;
+    public AudioClip alertAlert;
     
     //public Animator shopAnim;
     void Start()
@@ -141,6 +144,7 @@ public class GameManager : MonoBehaviour
         //StartCoroutine("StartWave");
         additionalHealthPercent = 0;
         pathogenSpeed = 4;
+        pause.SetActive(false);
 
     }
 
@@ -153,6 +157,11 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void alert()
+    {
+        AS.PlayOneShot(alertAlert);
+    }
+    
     public void AddPercent(int add)
     {
         fatCells += add;
@@ -180,9 +189,11 @@ public class GameManager : MonoBehaviour
             if (Time.timeScale == 0)
             {
                 music.Pause();
+                pause.SetActive(true);
             }
             else
             {
+                pause.SetActive(false);
                 music.Play();
             }
         }
@@ -765,6 +776,7 @@ public class GameManager : MonoBehaviour
             {
                 BrianAS.PlayOneShot(BrianLines[0]);
                 brianText.text = "These guys are single celled organisms! They can be both helpful and harmful to your body. These bacteria are definitely harmful though!";
+                rupertText.text= "Bacteria are going to try and destroy your cells while getting to the end of the map be careful!";
             }
             
             pathogenProbability.Clear();
@@ -781,6 +793,7 @@ public class GameManager : MonoBehaviour
             {
                 BrianAS.PlayOneShot(BrianLines[1]);
                 brianText.text = "Viruses are tiny microscopic organisms that can’t reproduce on their own! They go into organisms and use their equipment to reproduce and make more viruses! They are so small they are 100 to 1,000x smaller than your cells!";
+                rupertText.text = "Virus are more dangerous than Bacteria and have more health! I hate Corona Virus, thankfully we have vaccines to help us combat it!";
                 // Something cool about viruses is that scientists can’t even classify them under the current conditions of being alive!
             }
             pathogenProbability.Clear();
@@ -796,6 +809,7 @@ public class GameManager : MonoBehaviour
             {
                 BrianAS.PlayOneShot(BrianLines[2]);
                 brianText.text = "Fungi are a type of living creature that are easily identified by their way of spreading and growing through spores. They can become dangerous and infect your body if these spores are able to spread and grow on or inside you!";
+                rupertText.text = "Despite their name I don’t like to have fun with these guys.";
             }
             pathogenProbability.Clear();
             pathogenProbability = new List<ScriptablePathogen>()
@@ -810,6 +824,7 @@ public class GameManager : MonoBehaviour
             {
                 BrianAS.PlayOneShot(BrianLines[3]);
                 brianText.text = "Allergies are actually not harmful! However, your body thinks they are harmful pathogens here to attack the body and thus attack back and try and defend your body.";
+                rupertText.text = "Allergies, I have no idea why we hate these guys but attack!";
             }
             pathogenProbability.Clear();
             pathogenProbability = new List<ScriptablePathogen>()
@@ -824,6 +839,7 @@ public class GameManager : MonoBehaviour
             {
                 BrianAS.PlayOneShot(BrianLines[4]);
                 brianText.text = "Amoeba are a unicellular organism that are easily identifiable by their ability to form false feet! They are able to use extensions of their body to move around in what scientists think is one of the most primitive forms of animal locomotion. They are also one of the three types of parasites that can afflict your body!";
+                rupertText.text = "I hate those single celled demons, stay away from me ew!";
             }
             pathogenProbability.Clear();
             pathogenProbability = new List<ScriptablePathogen>()
@@ -837,6 +853,8 @@ public class GameManager : MonoBehaviour
             {
                 BrianAS.PlayOneShot(BrianLines[5]);
                 brianText.text = "Parasites are a type of organism that needs a host to survive and reproduce. One of the three types of parasites are made primarily of worms that live in your digestive tract! They eat and take nutrients from your body as well reproduce and can even grow to be around 39 inches!";
+                rupertText.text = "Look out there are parasites! I hate those gross worms.";
+
             }
             pathogenProbability.Clear();
             pathogenProbability = new List<ScriptablePathogen>()
@@ -850,7 +868,9 @@ public class GameManager : MonoBehaviour
             {
                 BrianAS.PlayOneShot(BrianLines[6]);
                 brianText.text = "Cancer is very dangerous and happens when your cells start reproducing and creating abnormal cells! This creates tumors which are clusters of these malfunctioning cells and can spread around the body!";
+                rupertText.text = "Cancer is the worst of all pathogens because they are traitors and were once cells like you and me.";
             }
+            
             pathogenProbability.Clear();
             pathogenProbability = new List<ScriptablePathogen>()
             {
