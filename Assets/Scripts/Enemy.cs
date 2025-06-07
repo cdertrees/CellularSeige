@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
     void Awake()
     {
         _anim = GetComponent<Animator>();
-
+        //speed -= GameManager.inst.additionalSpeedPercent;
         pathogen = GameManager.inst.pathogenProbability[Random.Range(0, GameManager.inst.pathogenProbability.Count)];
         EvaluateType(pathogen);
     }
@@ -82,7 +82,6 @@ public class Enemy : MonoBehaviour
     {
         _anim.Play(_path.anims[Random.Range(0,_path.anims.Count)].name);
         _damage = _path.damage;
-        //_speedmod = _path.speed;
         enemyType = _path.enemyType;
         _cooldownTime = _path.coolDown;
         health = _path.health;

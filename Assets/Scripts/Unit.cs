@@ -46,7 +46,7 @@ public class Unit : MonoBehaviour
     public AudioSource AS;
     public AudioClip Heal;
     public AudioClip attackSound;
-    
+    public AudioClip die;
     
     public Vector2 ogPosition;
 
@@ -150,6 +150,8 @@ public class Unit : MonoBehaviour
 
     public void ReevaluateType(ScriptableUnit unitTemp)
     {
+       
+        
         if (!_anim.GetCurrentAnimatorStateInfo(0).IsName("Stem"))
         {
             if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Basophil"))
@@ -278,7 +280,14 @@ public class Unit : MonoBehaviour
         _health = _unit.health + ((GameManager.inst.additionalHealthPercent/100f) * _unit.health);
         _timer = _cooldownTime;
         _anim.Play(_unit.animation.name);
-       print(_unit.animation.name);
+            //
+            // if (_unit.animation.name =="Stem")
+            // {
+            //     print("died");
+            //
+            // }
+        
+            print(_unit.animation.name);
             if (_unit.animation.name == "Basophil")
             {
                 GameManager.inst.Basophils.Add(this);
@@ -363,6 +372,7 @@ public class Unit : MonoBehaviour
             calcHealthBar();
             if (_health <= 0)
             {
+                AS.PlayOneShot(die);
                 
                 print("i died");
                 ReevaluateType(unit);

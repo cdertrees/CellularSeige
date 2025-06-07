@@ -128,12 +128,20 @@ public class GameManager : MonoBehaviour
 
     private float pathogenSpeed;
 
+
+    public AudioClip hurtOrgan;
     public GameObject pause;
     public AudioClip alertAlert;
     
     //public Animator shopAnim;
     void Start()
     {
+        timesAttacked = 0;
+        pathsKilled = 0;
+        upgradesPurchased = 0;
+        unitsPlaced = 0;
+        score = 0;
+        waveNum = 0;
         StartCoroutine("GainDNA");
         brianText.text = "";
         rupertText.text = "";
@@ -248,11 +256,13 @@ public class GameManager : MonoBehaviour
     public void PathogenEnters(int dmg)
     {
         //Take Damage (Refers to the ORGAN not the individual unit.)
-        
         health -= dmg;
         healthText.text = "HEALTH: " + health;
+        AS.PlayOneShot(hurtOrgan);
+        print("ah");
         if (health <= 0)
-        {
+        {   
+            
             score = (int)waveNum;
             SceneManager.LoadScene("End");
         }
@@ -793,7 +803,7 @@ public class GameManager : MonoBehaviour
             {
                 BrianAS.PlayOneShot(BrianLines[1]);
                 brianText.text = "Viruses are tiny microscopic organisms that can’t reproduce on their own! They go into organisms and use their equipment to reproduce and make more viruses! They are so small they are 100 to 1,000x smaller than your cells!";
-                rupertText.text = "Virus are more dangerous than Bacteria and have more health! I hate Corona Virus, thankfully we have vaccines to help us combat it!";
+                rupertText.text = "Virus are more dangerous than Bacteria and have more health!";
                 // Something cool about viruses is that scientists can’t even classify them under the current conditions of being alive!
             }
             pathogenProbability.Clear();
@@ -839,7 +849,7 @@ public class GameManager : MonoBehaviour
             {
                 BrianAS.PlayOneShot(BrianLines[4]);
                 brianText.text = "Amoeba are a unicellular organism that are easily identifiable by their ability to form false feet! They are able to use extensions of their body to move around in what scientists think is one of the most primitive forms of animal locomotion. They are also one of the three types of parasites that can afflict your body!";
-                rupertText.text = "I hate those single celled demons, stay away from me ew!";
+                rupertText.text = "I hate those single celled blobs, stay away from me ew!";
             }
             pathogenProbability.Clear();
             pathogenProbability = new List<ScriptablePathogen>()
